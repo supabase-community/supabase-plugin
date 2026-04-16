@@ -6,10 +6,10 @@ The official Supabase plugin for AI coding assistants. One repo, distributed to 
 
 | Platform | Install |
 |---|---|
-| [Claude Code](https://claude.ai/code) | See [docs/claude-code.md](docs/claude-code.md) |
-| [Cursor](https://cursor.com) | See [docs/cursor.md](docs/cursor.md) |
+| [Claude Code](https://claude.ai/code) | — |
+| [Cursor](https://cursor.com) | — |
 | [Gemini CLI](https://github.com/google-gemini/gemini-cli) | `gemini extensions install https://github.com/supabase-community/supabase-plugin` |
-| [Codex](https://openai.com/codex) | See [docs/codex.md](docs/codex.md) |
+| [Codex](https://openai.com/codex) | — |
 
 ## What's Included
 
@@ -32,9 +32,8 @@ supabase-plugin/
 ├── skills/                     # Symlink → submodules/agent-skills/skills/supabase*
 │   ├── supabase/
 │   └── supabase-postgres-best-practices/
-├── submodules/
-│   └── agent-skills/           # git submodule: github.com/supabase/agent-skills
-└── docs/                       # Per-platform install guides
+└── submodules/
+    └── agent-skills/           # git submodule: github.com/supabase/agent-skills
 ```
 
 ## Development
