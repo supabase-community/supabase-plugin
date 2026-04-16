@@ -1,0 +1,19 @@
+{
+  "name": "supabase",
+  "version": "0.1.0",
+  "description": "Access your Supabase projects and perform tasks like managing tables, fetching config, and querying data.",
+  "author": {
+    "name": "Supabase",
+    "email": "support@supabase.io",
+    "url": "https://supabase.com"
+  },
+  "keywords": [
+    "supabase",
+    "postgres",
+    "database",
+    "backend",
+    "mcp"
+  ],
+  "logo": "https://supabase.com/favicon/favicon.svg",
+  "primaryColor": "#3ECF8E"
+}
