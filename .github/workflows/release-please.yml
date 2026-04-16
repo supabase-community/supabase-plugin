@@ -38,7 +38,6 @@ jobs:
           tar -czvf supabase-cursor-plugin.tar.gz \
             --dereference \
             .cursor-plugin/ \
-            mcp.json \
             skills/
 
       - name: Build Gemini archive
@@ -56,7 +55,6 @@ jobs:
           tar -czvf supabase-codex-plugin.tar.gz \
             --dereference \
             .codex-plugin/ \
-            .mcp.json \
             skills/ \
             assets/
 
