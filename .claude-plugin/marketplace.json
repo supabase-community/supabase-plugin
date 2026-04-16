@@ -1,0 +1,29 @@
+{
+  "name": "supabase",
+  "owner": {
+    "name": "Supabase"
+  },
+  "plugins": [
+    {
+      "name": "supabase-plugin",
+      "source": "./",
+      "description": "Supabase MCP integration for database operations, authentication, storage, and real-time subscriptions. Manage your Supabase projects, run SQL queries, and interact with your backend directly.",
+      "author": {
+        "name": "Supabase"
+      },
+      "repository": "https://github.com/supabase-community/supabase-plugin",
+      "license": "MIT",
+      "keywords": [
+        "supabase",
+        "postgres",
+        "database",
+        "backend",
+        "mcp",
+        "auth",
+        "storage",
+        "realtime",
+        "edge-functions"
+      ]
+    }
+  ]
+}

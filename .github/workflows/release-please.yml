@@ -26,28 +26,25 @@ jobs:
       - name: Build Claude Code archive
         if: ${{ steps.release.outputs.release_created }}
         run: |
-          cd packages/claude-code
-          tar -czvf ../../supabase-claude-code-plugin.tar.gz \
+          tar -czvf supabase-claude-code-plugin.tar.gz \
             --dereference \
-            .claude-plugin/plugin.json \
+            .claude-plugin/ \
             .mcp.json \
             skills/
 
       - name: Build Cursor archive
         if: ${{ steps.release.outputs.release_created }}
         run: |
-          cd packages/cursor
-          tar -czvf ../../supabase-cursor-plugin.tar.gz \
+          tar -czvf supabase-cursor-plugin.tar.gz \
             --dereference \
-            .cursor-plugin/plugin.json \
+            .cursor-plugin/ \
             mcp.json \
             skills/
 
       - name: Build Gemini archive
         if: ${{ steps.release.outputs.release_created }}
         run: |
-          cd packages/gemini
-          tar -czvf ../../supabase-gemini-extension.tar.gz \
+          tar -czvf supabase-gemini-extension.tar.gz \
             --dereference \
             gemini-extension.json \
             SUPABASE.md \
@@ -56,10 +53,9 @@ jobs:
       - name: Build Codex archive
         if: ${{ steps.release.outputs.release_created }}
         run: |
-          cd packages/codex
-          tar -czvf ../../supabase-codex-plugin.tar.gz \
+          tar -czvf supabase-codex-plugin.tar.gz \
             --dereference \
-            .codex-plugin/plugin.json \
+            .codex-plugin/ \
             .mcp.json \
             skills/ \
             assets/

@@ -7,13 +7,23 @@
     "email": "support@supabase.io",
     "url": "https://supabase.com"
   },
+  "homepage": "https://supabase.com",
+  "repository": "https://github.com/supabase-community/supabase-plugin",
+  "license": "MIT",
   "keywords": [
     "supabase",
     "postgres",
     "database",
     "backend",
-    "mcp"
+    "mcp",
+    "auth",
+    "storage",
+    "realtime",
+    "edge-functions",
+    "migrations",
+    "rls"
   ],
-  "logo": "https://supabase.com/favicon/favicon.svg",
-  "primaryColor": "#3ECF8E"
+  "logo": "assets/logo.svg",
+  "primaryColor": "#3ECF8E",
+  "skills": "skills"
 }

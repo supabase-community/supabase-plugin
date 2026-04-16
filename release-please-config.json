@@ -7,22 +7,27 @@
       "extra-files": [
         {
           "type": "json",
-          "path": "packages/claude-code/.claude-plugin/plugin.json",
+          "path": ".claude-plugin/plugin.json",
           "jsonpath": "$.version"
         },
         {
           "type": "json",
-          "path": "packages/cursor/.cursor-plugin/plugin.json",
+          "path": ".cursor-plugin/plugin.json",
           "jsonpath": "$.version"
         },
         {
           "type": "json",
-          "path": "packages/gemini/gemini-extension.json",
+          "path": "gemini-extension.json",
           "jsonpath": "$.version"
         },
         {
           "type": "json",
-          "path": "packages/codex/.codex-plugin/plugin.json",
+          "path": ".codex-plugin/plugin.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": ".plugin/plugin.json",
           "jsonpath": "$.version"
         }
       ]

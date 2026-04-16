@@ -1,0 +1,24 @@
+{
+  "name": "supabase",
+  "version": "0.1.0",
+  "description": "Supabase MCP integration for database operations, authentication, storage, and real-time subscriptions. Manage your Supabase projects, run SQL queries, and interact with your backend directly.",
+  "author": {
+    "name": "Supabase",
+    "url": "https://github.com/supabase"
+  },
+  "repository": "https://github.com/supabase-community/supabase-plugin",
+  "license": "MIT",
+  "keywords": [
+    "supabase",
+    "postgres",
+    "database",
+    "backend",
+    "mcp",
+    "auth",
+    "storage",
+    "realtime",
+    "edge-functions",
+    "migrations",
+    "rls"
+  ]
+}
