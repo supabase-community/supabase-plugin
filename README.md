@@ -6,7 +6,7 @@ The official Supabase plugin for AI coding assistants. One repo, distributed to 
 
 | Platform | Install |
 |---|---|
-| [Claude Code](https://claude.ai/code) | `/plugin marketplace add supabase-community/supabase-plugin` then `/plugin install supabase-plugin@supabase` |
+| [Claude Code](https://claude.ai/code) | `/plugin marketplace add supabase-community/supabase-plugin` then `/plugin install supabase@supabase` |
 | [Cursor](https://cursor.com) | `/add-plugin` in the editor, or via Dashboard → Settings → Plugins → Team Marketplaces → Import `https://github.com/supabase-community/supabase-plugin` |
 | [Gemini CLI](https://github.com/google-gemini/gemini-cli) | `gemini extensions install https://github.com/supabase-community/supabase-plugin` |
 | [Codex](https://openai.com/codex) | Run `codex`, then `/plugins` → Install plugin → search for `supabase` |

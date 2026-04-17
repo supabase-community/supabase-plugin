@@ -1,5 +1,5 @@
 {
-  "name": "supabase-plugin",
+  "name": "supabase",
   "version": "0.1.0",
   "description": "Official Supabase plugin — skills for Supabase development and Postgres best practices, plus MCP server integration for managing your Supabase projects directly from your AI coding assistant.",
   "author": {
