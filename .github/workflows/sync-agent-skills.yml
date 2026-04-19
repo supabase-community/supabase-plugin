@@ -1,4 +1,4 @@
-name: Sync agent-skills release
+name: Sync Supabase agent skills from supabase/agent-skills releases
 
 on:
   schedule:
@@ -109,8 +109,8 @@ jobs:
         with:
           branch: chore/sync-agent-skills-${{ steps.release.outputs.tag }}
           delete-branch: true
-          commit-message: chore: sync skills from agent-skills ${{ steps.release.outputs.tag }}
-          title: chore: sync skills from agent-skills ${{ steps.release.outputs.tag }}
+          commit-message: "chore: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
+          title: "chore: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
           body: |
             ## Summary
             - sync vendored skills from `supabase/agent-skills`
