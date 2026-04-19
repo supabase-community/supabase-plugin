@@ -26,6 +26,12 @@ jobs:
       - name: Create archive
         if: ${{ steps.release.outputs.release_created }}
         run: |
+          tar -czvf supabase-claude-code-plugin.tar.gz \
+            --dereference \
+            .claude-plugin/plugin.json \
+            mcp/claude-code/.mcp.json \
+            skills/
+
           tar -czvf supabase-gemini-extension.tar.gz \
             --dereference \
             gemini-extension.json \
@@ -51,6 +57,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release upload ${{ steps.release.outputs.tag_name }} \
+            supabase-claude-code-plugin.tar.gz \
             supabase-gemini-extension.tar.gz \
             supabase-cursor-plugin.tar.gz \
             supabase-codex-plugin.tar.gz
