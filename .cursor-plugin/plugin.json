@@ -1,0 +1,20 @@
+{
+  "name": "supabase",
+  "version": "0.1.5",
+  "description": "Official Supabase plugin for Claude Code with bundled Supabase skills and MCP access for project management, database work, auth, storage, and Postgres best practices.",
+  "author": {
+    "name": "Supabase",
+    "url": "https://supabase.com"
+  },
+  "keywords": [
+    "supabase",
+    "postgres",
+    "database",
+    "backend",
+    "mcp"
+  ],
+  "logo": "https://supabase.com/favicon/favicon.svg",
+  "skills": "./skills/",
+  "mcpServers": "./mcp/cursor/.mcp.json",
+  "primaryColor": "#3ECF8E"
+}
