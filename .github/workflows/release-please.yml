@@ -38,6 +38,13 @@ jobs:
             mcp/cursor/.mcp.json \
             skills/
 
+          tar -czvf supabase-codex-plugin.tar.gz \
+            --dereference \
+            .codex-plugin/plugin.json \
+            mcp/codex/.mcp.json \
+            skills/ \
+            assets/
+
       - name: Upload release asset
         if: ${{ steps.release.outputs.release_created }}
         env:
@@ -45,4 +52,5 @@ jobs:
         run: |
           gh release upload ${{ steps.release.outputs.tag_name }} \
             supabase-gemini-extension.tar.gz \
-            supabase-cursor-plugin.tar.gz
+            supabase-cursor-plugin.tar.gz \
+            supabase-codex-plugin.tar.gz
