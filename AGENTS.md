@@ -80,4 +80,13 @@ When adding a new vendor plugin:
 
 ## Syncing Skills
 
-The shipped skills in `skills/` are intended to be real vendored files. If they are updated from another upstream authoring repo, sync them into this repo as normal files and review the diff here before release.
+The shipped skills in `skills/` are intended to be real vendored files.
+
+- The source of truth for skill content is `supabase/agent-skills`.
+- This repo consumes release assets from `supabase/agent-skills`, not a submodule or symlink.
+- The sync workflow expects the upstream release to publish:
+  - `supabase.tar.gz`
+  - `supabase-postgres-best-practices.tar.gz`
+- Synced provenance is tracked in `skills/.upstream.json`.
+
+If skills are updated upstream, use the sync workflow or the repository dispatch event to vendor them into this repo as normal files and review the resulting PR here before merge.

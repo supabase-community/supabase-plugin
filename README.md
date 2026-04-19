@@ -16,8 +16,12 @@ supabase-plugin/
 │   └── marketplace.json
 ├── .mcp.json
 ├── AGENTS.md
+├── CLAUDE.md
 ├── README.md
+├── .github/workflows/
+│   └── sync-agent-skills.yml
 └── skills/
+    ├── .upstream.json
     ├── supabase/
     └── supabase-postgres-best-practices/
 ```
@@ -49,3 +53,4 @@ Then use `/reload-plugins` after edits and verify the namespaced skills:
 
 ## Notes
 - The root `skills/` directory must contain real files. Do not switch it back to a symlink or submodule-backed path.
+- Vendored skills are synced from `supabase/agent-skills` release assets through `.github/workflows/sync-agent-skills.yml`.
