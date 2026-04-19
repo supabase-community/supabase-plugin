@@ -1,13 +1,15 @@
 {
   "name": "supabase",
-  "version": "0.1.0",
-  "description": "Supabase MCP integration for database operations, authentication, storage, and real-time subscriptions. Manage your Supabase projects, run SQL queries, and interact with your backend directly.",
+  "version": "0.1.4",
+  "description": "Official Supabase plugin for Claude Code with bundled Supabase skills and MCP access for project management, database work, auth, storage, and Postgres best practices.",
   "author": {
     "name": "Supabase",
-    "url": "https://github.com/supabase"
+    "url": "https://supabase.com"
   },
   "repository": "https://github.com/supabase-community/supabase-plugin",
   "license": "MIT",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
   "keywords": [
     "supabase",
     "postgres",
