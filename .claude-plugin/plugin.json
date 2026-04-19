@@ -9,7 +9,7 @@
   "repository": "https://github.com/supabase-community/supabase-plugin",
   "license": "MIT",
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
+  "mcpServers": "./mcp/claude-code/.mcp.json",
   "keywords": [
     "supabase",
     "postgres",
