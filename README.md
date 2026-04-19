@@ -66,4 +66,4 @@ Then use `/reload-plugins` after edits and verify the namespaced skills:
 ## Notes
 - The root `skills/` directory must contain real files. Do not switch it back to a symlink or submodule-backed path.
 - Vendored skills are synced from `supabase/agent-skills` release assets through `.github/workflows/sync-agent-skills.yml`.
-- `release-please` publishes `supabase-gemini-extension.tar.gz`, `supabase-cursor-plugin.tar.gz`, and `supabase-codex-plugin.tar.gz` from this repo.
+- `release-please` publishes `supabase-claude-code-plugin.tar.gz`, `supabase-gemini-extension.tar.gz`, `supabase-cursor-plugin.tar.gz`, and `supabase-codex-plugin.tar.gz` from this repo.
