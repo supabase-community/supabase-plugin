@@ -24,3 +24,13 @@ jobs:
 
       - name: Validate marketplace manifest
         run: npx -y @anthropic-ai/claude-code plugin validate .claude-plugin/marketplace.json
+
+      - name: Check version sync between plugin.json and .mcp.json
+        run: |
+          plugin_version=$(jq -r '.version' .claude-plugin/plugin.json)
+          mcp_version=$(jq -r '.mcpServers.supabase.headers["X-Source-Version"]' .mcp.json)
+          if [ "$plugin_version" != "$mcp_version" ]; then
+            echo "Version mismatch: plugin.json=$plugin_version, .mcp.json=$mcp_version"
+            exit 1
+          fi
+          echo "Versions match: $plugin_version"
