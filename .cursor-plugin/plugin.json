@@ -6,21 +6,15 @@
     "name": "Supabase",
     "url": "https://supabase.com"
   },
-  "repository": "https://github.com/supabase-community/supabase-plugin",
-  "license": "MIT",
-  "skills": "./skills/",
-  "mcpServers": "./mcp/claude-code/.mcp.json",
   "keywords": [
     "supabase",
     "postgres",
     "database",
     "backend",
-    "mcp",
-    "auth",
-    "storage",
-    "realtime",
-    "edge-functions",
-    "migrations",
-    "rls"
-  ]
+    "mcp"
+  ],
+  "logo": "https://supabase.com/favicon/favicon.svg",
+  "skills": "./skills/",
+  "mcpServers": "./mcp/cursor/.mcp.json",
+  "primaryColor": "#3ECF8E"
 }

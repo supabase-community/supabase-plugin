@@ -1,0 +1,35 @@
+{
+  "name": "supabase",
+  "owner": {
+    "name": "Supabase",
+    "url": "https://github.com/supabase"
+  },
+  "metadata": {
+    "description": "Supabase-maintained Cursor plugin marketplace entry for the official Supabase plugin",
+    "version": "0.1.4"
+  },
+  "plugins": [
+    {
+      "name": "supabase",
+      "source": "./",
+      "description": "Official Supabase plugin for Cursor with bundled Supabase skills and MCP tools.",
+      "author": {
+        "name": "Supabase",
+        "url": "https://supabase.com"
+      },
+      "homepage": "https://github.com/supabase-community/supabase-plugin",
+      "repository": "https://github.com/supabase-community/supabase-plugin",
+      "license": "MIT",
+      "keywords": [
+        "supabase",
+        "postgres",
+        "database",
+        "mcp",
+        "auth",
+        "storage",
+        "realtime",
+        "rls"
+      ]
+    }
+  ]
+}
