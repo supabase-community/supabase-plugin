@@ -1,6 +1,6 @@
 {
   "name": "supabase",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "Official Supabase plugin for Codex with bundled Supabase skills and MCP access for project management, database work, auth, storage, and Postgres best practices.",
   "author": {
     "name": "Supabase",
@@ -22,11 +22,11 @@
     "rls"
   ],
   "skills": "./skills/",
-  "mcpServers": "./mcp/codex/.mcp.json",
+  "apps": "./.app.json",
   "interface": {
     "displayName": "Supabase",
     "shortDescription": "Supabase skills and MCP tools for Codex",
-    "longDescription": "Official Supabase plugin for Codex with bundled Supabase skills and MCP server integration for project management, database work, auth, storage, and Postgres best practices.",
+    "longDescription": "Official Supabase plugin for Codex. Includes agent skills for Supabase development and Postgres best practices, plus MCP server integration for managing your Supabase projects directly from Codex.",
     "developerName": "Supabase",
     "category": "Coding",
     "capabilities": [
@@ -36,6 +36,11 @@
     "websiteURL": "https://supabase.com",
     "privacyPolicyURL": "https://supabase.com/privacy",
     "termsOfServiceURL": "https://supabase.com/terms",
+    "defaultPrompt": [
+      "Use Supabase to set up Auth and protected routes for my app.",
+      "Review my Supabase schema and RLS policies for security issues.",
+      "Optimize my Postgres queries and indexes using Supabase best practices."
+    ],
     "brandColor": "#3ECF8E",
     "logo": "./assets/logo.svg"
   }

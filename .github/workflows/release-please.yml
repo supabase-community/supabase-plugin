@@ -20,8 +20,6 @@ jobs:
 
       - uses: actions/checkout@v4
         if: ${{ steps.release.outputs.release_created }}
-        with:
-          submodules: true
 
       - name: Create archive
         if: ${{ steps.release.outputs.release_created }}
@@ -29,6 +27,7 @@ jobs:
           tar -czvf supabase-claude-code-plugin.tar.gz \
             --dereference \
             .claude-plugin/plugin.json \
+            .claude-plugin/marketplace.json \
             mcp/claude-code/.mcp.json \
             skills/
 
@@ -41,13 +40,15 @@ jobs:
           tar -czvf supabase-cursor-plugin.tar.gz \
             --dereference \
             .cursor-plugin/plugin.json \
+            .cursor-plugin/marketplace.json \
             mcp/cursor/.mcp.json \
             skills/
 
           tar -czvf supabase-codex-plugin.tar.gz \
             --dereference \
             .codex-plugin/plugin.json \
-            mcp/codex/.mcp.json \
+            .codex-plugin/marketplace.json \
+            .app.json \
             skills/ \
             assets/
 

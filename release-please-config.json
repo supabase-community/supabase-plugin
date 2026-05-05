@@ -34,6 +34,21 @@
           "type": "json",
           "path": "gemini-extension.json",
           "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": "gemini-extension.json",
+          "jsonpath": "$.mcpServers.supabase.headers[\"X-Source-Version\"]"
+        },
+        {
+          "type": "json",
+          "path": "mcp/claude-code/.mcp.json",
+          "jsonpath": "$.mcpServers.supabase.headers[\"X-Source-Version\"]"
+        },
+        {
+          "type": "json",
+          "path": "mcp/cursor/.mcp.json",
+          "jsonpath": "$.supabase.headers[\"X-Source-Version\"]"
         }
       ]
     }

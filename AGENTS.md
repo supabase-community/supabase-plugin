@@ -9,9 +9,9 @@ Keep this repository focused on the shared multi-vendor plugin layout:
 - `.claude-plugin/plugin.json` defines plugin identity and metadata
 - `.claude-plugin/marketplace.json` provides an optional self-hosted marketplace wrapper
 - `.cursor-plugin/plugin.json` and `.cursor-plugin/marketplace.json` define the Cursor plugin surfaces
-- `.codex-plugin/plugin.json` defines the Codex plugin manifest
-- `.mcp.json` remains available at the repo root for shared tooling expectations
-- `mcp/claude-code/.mcp.json`, `mcp/cursor/.mcp.json`, and `mcp/codex/.mcp.json` configure vendor-specific MCP adapters
+- `.codex-plugin/plugin.json` and `.codex-plugin/marketplace.json` define the Codex plugin surfaces
+- `.app.json` provides the Codex app ID for MCP authentication
+- `mcp/claude-code/.mcp.json` and `mcp/cursor/.mcp.json` configure vendor-specific MCP adapters
 - `gemini-extension.json` defines the Gemini extension manifest
 - `skills/` contains the shipped, real skill files consumed by the supported plugin surfaces
 
@@ -33,7 +33,7 @@ npx claude plugin validate .claude-plugin/marketplace.json
 
 ## Editing Rules
 
-- Do not move `skills/`, `.mcp.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, or `.codex-plugin/plugin.json` out of the repo root layout.
+- Do not move `skills/`, `.app.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, or `.codex-plugin/plugin.json` out of the repo root layout.
 - Do not replace `skills/` with a symlink or submodule reference.
 - Keep the plugin name stable as `supabase` unless there is a deliberate migration plan.
 - When changing descriptions or keywords, update both `plugin.json` and `marketplace.json` together.

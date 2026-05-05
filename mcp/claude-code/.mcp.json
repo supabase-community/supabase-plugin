@@ -2,7 +2,11 @@
   "mcpServers": {
     "supabase": {
       "type": "http",
-      "url": "https://mcp.supabase.com/mcp?utm_source=claude-code-plugin"
+      "url": "https://mcp.supabase.com/mcp",
+      "headers": {
+        "X-Source-Name": "claude-code-plugin",
+        "X-Source-Version": "0.1.6"
+      }
     }
   }
 }

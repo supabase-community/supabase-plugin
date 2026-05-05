@@ -14,11 +14,12 @@ supabase-plugin/
 │   ├── plugin.json
 │   └── marketplace.json
 ├── .codex-plugin/
-│   └── plugin.json
+│   ├── plugin.json
+│   └── marketplace.json
 ├── .cursor-plugin/
 │   ├── plugin.json
 │   └── marketplace.json
-├── .mcp.json
+├── .app.json
 ├── assets/
 │   └── logo.svg
 ├── AGENTS.md
@@ -30,7 +31,6 @@ supabase-plugin/
 ├── gemini-extension.json
 ├── mcp/
 │   ├── claude-code/.mcp.json
-│   ├── codex/.mcp.json
 │   └── cursor/.mcp.json
 └── skills/
     ├── .upstream.json
