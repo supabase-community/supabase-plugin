@@ -10,8 +10,8 @@ Keep this repository focused on the shared multi-vendor plugin layout:
 - `.claude-plugin/marketplace.json` provides an optional self-hosted marketplace wrapper
 - `.cursor-plugin/plugin.json` and `.cursor-plugin/marketplace.json` define the Cursor plugin surfaces
 - `.codex-plugin/plugin.json` and `.codex-plugin/marketplace.json` define the Codex plugin surfaces
-- `.app.json` provides the Codex app ID for MCP authentication
-- `mcp/claude-code/.mcp.json` and `mcp/cursor/.mcp.json` configure vendor-specific MCP adapters
+- `.app.json` points to the official Supabase Chatgpt app, available through Codex plugin
+- `mcp/claude-code/.mcp.json` and `mcp/cursor/mcp.json` configure vendor-specific MCP adapters
 - `gemini-extension.json` defines the Gemini extension manifest
 - `skills/` contains the shipped, real skill files consumed by the supported plugin surfaces
 

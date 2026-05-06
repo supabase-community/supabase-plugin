@@ -1,4 +1,4 @@
-# Supabase Vendor Plugins
+# Supabase Agent Plugin
 
 Official Supabase plugin distribution repo for Claude Code, Cursor, Codex, and Gemini. It bundles:
 
@@ -31,7 +31,7 @@ supabase-plugin/
 ├── gemini-extension.json
 ├── mcp/
 │   ├── claude-code/.mcp.json
-│   └── cursor/.mcp.json
+│   └── cursor/mcp.json
 └── skills/
     ├── .upstream.json
     ├── supabase/

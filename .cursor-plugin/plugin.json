@@ -16,6 +16,6 @@
   ],
   "logo": "https://supabase.com/favicon/favicon.svg",
   "skills": "./skills/",
-  "mcpServers": "./mcp/cursor/.mcp.json",
+  "mcpServers": "./mcp/cursor/mcp.json",
   "primaryColor": "#3ECF8E"
 }
