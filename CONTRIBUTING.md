@@ -2,7 +2,7 @@
 
 ## Testing
 
-Before opening a PR, test the plugin locally on the surfaces you've changed.
+Before opening a PR, test the plugin locally on the surfaces you've changed. Follow the instructions below to test the plugin for every vendor supported:
 
 - **Claude Code** — [Create your first plugin](https://code.claude.com/docs/en/plugins#create-your-first-plugin)
 - **Cursor** — [Test plugins locally](https://cursor.com/docs/plugins#test-plugins-locally)
