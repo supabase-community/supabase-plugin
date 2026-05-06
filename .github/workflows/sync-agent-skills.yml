@@ -68,49 +68,56 @@ jobs:
           gh release download "${{ steps.release.outputs.tag }}" \
             --repo supabase/agent-skills \
             --dir /tmp/agent-skills-release \
-            --pattern "supabase.tar.gz" \
-            --pattern "supabase-postgres-best-practices.tar.gz"
+            --pattern "*.tar.gz"
 
       - name: Replace vendored skills
         if: ${{ steps.should_sync.outputs.changed == 'true' }}
         run: |
-          rm -rf skills/supabase skills/supabase-postgres-best-practices
-          mkdir -p skills
+          # Remove previously managed skill directories
+          jq -r '.managed_paths[]' skills/.upstream.json | xargs -r rm -rf
 
-          tar -xzf /tmp/agent-skills-release/supabase.tar.gz -C skills
-          tar -xzf /tmp/agent-skills-release/supabase-postgres-best-practices.tar.gz -C skills
+          # Extract all downloaded skill tarballs
+          for tarball in /tmp/agent-skills-release/*.tar.gz; do
+            tar -xzf "${tarball}" -C skills
+          done
 
       - name: Update upstream metadata
         if: ${{ steps.should_sync.outputs.changed == 'true' }}
         shell: bash
         run: |
           SYNCED_AT=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          cat > skills/.upstream.json <<EOF
-          {
-            "source_repo": "supabase/agent-skills",
-            "source_release": "${{ steps.release.outputs.tag }}",
-            "source_version": "${{ steps.release.outputs.version }}",
-            "source_commit": "${{ steps.release.outputs.sha }}",
-            "synced_at": "${SYNCED_AT}",
-            "managed_paths": [
-              "skills/supabase",
-              "skills/supabase-postgres-best-practices"
-            ],
-            "assets": [
-              "supabase.tar.gz",
-              "supabase-postgres-best-practices.tar.gz"
-            ]
-          }
-          EOF
+
+          ASSETS=$(ls /tmp/agent-skills-release/*.tar.gz | xargs -I{} basename {} | jq -R . | jq -s .)
+          MANAGED_PATHS=$(ls /tmp/agent-skills-release/*.tar.gz | xargs -I{} basename {} .tar.gz | jq -R '"skills/" + .' | jq -s .)
+
+          jq -n \
+            --arg source_repo "supabase/agent-skills" \
+            --arg source_release "${{ steps.release.outputs.tag }}" \
+            --arg source_version "${{ steps.release.outputs.version }}" \
+            --arg source_commit "${{ steps.release.outputs.sha }}" \
+            --arg synced_at "${SYNCED_AT}" \
+            --argjson managed_paths "${MANAGED_PATHS}" \
+            --argjson assets "${ASSETS}" \
+            '{source_repo: $source_repo, source_release: $source_release, source_version: $source_version, source_commit: $source_commit, synced_at: $synced_at, managed_paths: $managed_paths, assets: $assets}' \
+            > skills/.upstream.json
+
+      - name: Generate GitHub App token
+        id: generate-token
+        if: ${{ steps.should_sync.outputs.changed == 'true' }}
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
+        with:
+          client-id: ${{ secrets.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
 
       - name: Create pull request
         if: ${{ steps.should_sync.outputs.changed == 'true' }}
         uses: peter-evans/create-pull-request@v7
         with:
+          token: ${{ steps.generate-token.outputs.token }}
           branch: chore/sync-agent-skills-${{ steps.release.outputs.tag }}
           delete-branch: true
-          commit-message: "chore: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
-          title: "chore: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
+          commit-message: "feat: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
+          title: "feat: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
           body: |
             ## Summary
             - sync vendored skills from `supabase/agent-skills`

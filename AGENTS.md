@@ -1,15 +1,19 @@
 # AGENTS.md
 
-This repository is the Claude Code plugin distribution repo for Supabase.
+This repository is the plugin distribution repo for Supabase across Claude Code, Cursor, Codex, and Gemini.
 
 ## Purpose
 
-Keep this repository focused on the Claude plugin shape:
+Keep this repository focused on the shared multi-vendor plugin layout:
 
 - `.claude-plugin/plugin.json` defines plugin identity and metadata
 - `.claude-plugin/marketplace.json` provides an optional self-hosted marketplace wrapper
-- `.mcp.json` configures the Supabase MCP server for Claude Code
-- `skills/` contains the shipped, real skill files consumed by Claude
+- `.cursor-plugin/plugin.json` and `.cursor-plugin/marketplace.json` define the Cursor plugin surfaces
+- `.codex-plugin/plugin.json` and `.codex-plugin/marketplace.json` define the Codex plugin surfaces
+- `.app.json` points to the official Supabase Chatgpt app, available through Codex plugin
+- `mcp/claude-code/.mcp.json` and `mcp/cursor/mcp.json` configure vendor-specific MCP adapters
+- `gemini-extension.json` defines the Gemini extension manifest
+- `skills/` contains the shipped, real skill files consumed by the supported plugin surfaces
 
 This repo should stay self-contained. Claude marketplace installs copy the plugin into Claude's local cache, so paths outside the plugin root are fragile and should be avoided.
 
@@ -29,7 +33,7 @@ npx claude plugin validate .claude-plugin/marketplace.json
 
 ## Editing Rules
 
-- Do not move `skills/`, `.mcp.json`, or `.claude-plugin/plugin.json` out of the repo root layout.
+- Do not move `skills/`, `.app.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, or `.codex-plugin/plugin.json` out of the repo root layout.
 - Do not replace `skills/` with a symlink or submodule reference.
 - Keep the plugin name stable as `supabase` unless there is a deliberate migration plan.
 - When changing descriptions or keywords, update both `plugin.json` and `marketplace.json` together.
