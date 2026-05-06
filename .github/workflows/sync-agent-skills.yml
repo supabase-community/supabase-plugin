@@ -116,8 +116,8 @@ jobs:
           token: ${{ steps.generate-token.outputs.token }}
           branch: chore/sync-agent-skills-${{ steps.release.outputs.tag }}
           delete-branch: true
-          commit-message: "fix: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
-          title: "fix: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
+          commit-message: "feat: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
+          title: "feat: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
           body: |
             ## Summary
             - sync vendored skills from `supabase/agent-skills`
