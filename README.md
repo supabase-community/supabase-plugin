@@ -2,6 +2,8 @@
 
 Official Supabase plugin distribution repo for Claude Code, Cursor, Codex, and Gemini. It bundles:
 
+> Want to contribute? Read [CONTRIBUTING.md](CONTRIBUTING.md) first.
+
 - `skills/supabase` for general Supabase product guidance
 - `skills/supabase-postgres-best-practices` for Postgres performance and schema guidance
 - vendor-specific plugin manifests and MCP adapters for each supported surface
@@ -26,8 +28,9 @@ supabase-plugin/
 ├── CLAUDE.md
 ├── README.md
 ├── .github/workflows/
-│   ├── release-please.yml
-│   └── sync-agent-skills.yml
+│   ├── bump-marketplace-versions.yml
+│   ├── sync-agent-skills.yml
+│   └── validate-plugin-manifests.yml
 ├── gemini-extension.json
 ├── mcp/
 │   ├── claude-code/.mcp.json
