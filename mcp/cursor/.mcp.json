@@ -4,7 +4,7 @@
     "url": "https://mcp.supabase.com/mcp",
     "headers": {
       "X-Source-Name": "cursor-plugin",
-      "X-Source-Version": "0.1.6"
+      "X-Source-Version": "0.1.7"
     }
   }
 }
