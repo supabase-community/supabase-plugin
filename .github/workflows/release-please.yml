@@ -1,0 +1,64 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/checkout@v4
+        if: ${{ steps.release.outputs.release_created }}
+
+      - name: Create archives
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          tar -czvf supabase-claude-code-plugin.tar.gz \
+            --dereference \
+            .claude-plugin/plugin.json \
+            .claude-plugin/marketplace.json \
+            mcp/claude-code/.mcp.json \
+            skills/
+
+          tar -czvf supabase-cursor-plugin.tar.gz \
+            --dereference \
+            .cursor-plugin/plugin.json \
+            .cursor-plugin/marketplace.json \
+            mcp/cursor/mcp.json \
+            skills/
+
+          tar -czvf supabase-codex-plugin.tar.gz \
+            --dereference \
+            .codex-plugin/plugin.json \
+            .codex-plugin/marketplace.json \
+            .app.json \
+            skills/ \
+            assets/
+
+          tar -czvf supabase-gemini-extension.tar.gz \
+            --dereference \
+            gemini-extension.json \
+            SUPABASE.md \
+            skills/
+
+      - name: Upload release assets
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ steps.release.outputs.tag_name }} \
+            supabase-claude-code-plugin.tar.gz \
+            supabase-cursor-plugin.tar.gz \
+            supabase-codex-plugin.tar.gz \
+            supabase-gemini-extension.tar.gz
