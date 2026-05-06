@@ -1,7 +1,7 @@
 {
   "name": "supabase",
   "version": "0.1.7",
-  "description": "Official Supabase plugin for Codex with bundled Supabase skills and MCP access for project management, database work, auth, storage, and Postgres best practices.",
+  "description": "Access your Supabase projects and perform tasks like managing tables, fetching config, and querying data.",
   "author": {
     "name": "Supabase",
     "email": "support@supabase.io",
@@ -15,11 +15,7 @@
     "postgres",
     "database",
     "backend",
-    "mcp",
-    "auth",
-    "storage",
-    "realtime",
-    "rls"
+    "mcp"
   ],
   "skills": "./skills/",
   "apps": "./.app.json",
