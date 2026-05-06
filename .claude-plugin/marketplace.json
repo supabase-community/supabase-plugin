@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Supabase-maintained Claude Code plugin marketplace entry for the official Supabase plugin",
-    "version": "0.1.4"
+    "version": "0.1.5"
   },
   "plugins": [
     {
