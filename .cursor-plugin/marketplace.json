@@ -2,6 +2,7 @@
   "name": "supabase",
   "owner": {
     "name": "Supabase",
+    "email": "support@supabase.io",
     "url": "https://github.com/supabase"
   },
   "metadata": {
@@ -24,11 +25,8 @@
         "supabase",
         "postgres",
         "database",
-        "mcp",
-        "auth",
-        "storage",
-        "realtime",
-        "rls"
+        "backend",
+        "mcp"
       ]
     }
   ]

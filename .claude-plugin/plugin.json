@@ -15,12 +15,6 @@
     "postgres",
     "database",
     "backend",
-    "mcp",
-    "auth",
-    "storage",
-    "realtime",
-    "edge-functions",
-    "migrations",
-    "rls"
+    "mcp"
   ]
 }

@@ -4,6 +4,7 @@
   "description": "Official Supabase plugin for Claude Code with bundled Supabase skills and MCP access for project management, database work, auth, storage, and Postgres best practices.",
   "author": {
     "name": "Supabase",
+    "email": "support@supabase.io",
     "url": "https://supabase.com"
   },
   "keywords": [

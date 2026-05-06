@@ -24,11 +24,8 @@
         "supabase",
         "postgres",
         "database",
-        "mcp",
-        "auth",
-        "storage",
-        "realtime",
-        "rls"
+        "backend",
+        "mcp"
       ]
     }
   ]
