@@ -12,18 +12,8 @@
         },
         {
           "type": "json",
-          "path": ".claude-plugin/marketplace.json",
-          "jsonpath": "$.metadata.version"
-        },
-        {
-          "type": "json",
           "path": ".cursor-plugin/plugin.json",
           "jsonpath": "$.version"
-        },
-        {
-          "type": "json",
-          "path": ".cursor-plugin/marketplace.json",
-          "jsonpath": "$.metadata.version"
         },
         {
           "type": "json",
@@ -47,7 +37,7 @@
         },
         {
           "type": "json",
-          "path": "mcp/cursor/.mcp.json",
+          "path": "mcp/cursor/mcp.json",
           "jsonpath": "$.supabase.headers[\"X-Source-Version\"]"
         }
       ]
