@@ -10,8 +10,7 @@ Keep this repository focused on the shared multi-vendor plugin layout:
 - `.claude-plugin/marketplace.json` provides an optional self-hosted marketplace wrapper
 - `.cursor-plugin/plugin.json` and `.cursor-plugin/marketplace.json` define the Cursor plugin surfaces
 - `.codex-plugin/plugin.json` and `.codex-plugin/marketplace.json` define the Codex plugin surfaces
-- `.app.json` points to the official Supabase Chatgpt app, available through Codex plugin
-- `mcp/claude-code/.mcp.json` and `mcp/cursor/mcp.json` configure vendor-specific MCP adapters
+- `agents/claude/.mcp.json`, `agents/cursor/mcp.json`, and `agents/codex/.app.json` hold agent-specific config files
 - `gemini-extension.json` defines the Gemini extension manifest
 - `skills/` contains the shipped, real skill files consumed by the supported plugin surfaces
 
@@ -33,7 +32,7 @@ npx claude plugin validate .claude-plugin/marketplace.json
 
 ## Editing Rules
 
-- Do not move `skills/`, `.app.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, or `.codex-plugin/plugin.json` out of the repo root layout.
+- Do not move `skills/`, `agents/`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, or `.codex-plugin/plugin.json` out of the repo root layout.
 - Do not replace `skills/` with a symlink or submodule reference.
 - Keep the plugin name stable as `supabase` unless there is a deliberate migration plan.
 - When changing descriptions or keywords, update both `plugin.json` and `marketplace.json` together.

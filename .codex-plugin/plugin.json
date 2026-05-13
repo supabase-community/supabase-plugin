@@ -18,7 +18,7 @@
     "mcp"
   ],
   "skills": "./skills/",
-  "apps": "./.app.json",
+  "apps": "./agents/codex/.app.json",
   "interface": {
     "displayName": "Supabase",
     "shortDescription": "Supabase skills and MCP tools for Codex",

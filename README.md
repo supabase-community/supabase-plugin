@@ -21,7 +21,10 @@ supabase-plugin/
 ├── .cursor-plugin/
 │   ├── plugin.json
 │   └── marketplace.json
-├── .app.json
+├── agents/
+│   ├── claude/.mcp.json
+│   ├── codex/.app.json
+│   └── cursor/mcp.json
 ├── assets/
 │   └── logo.svg
 ├── AGENTS.md
@@ -31,9 +34,6 @@ supabase-plugin/
 │   ├── sync-agent-skills.yml
 │   └── validate-plugin-manifests.yml
 ├── gemini-extension.json
-├── mcp/
-│   ├── claude-code/.mcp.json
-│   └── cursor/mcp.json
 └── skills/
     ├── .upstream.json
     ├── supabase/
