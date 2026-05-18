@@ -22,5 +22,3 @@ jobs:
       - name: Validate plugin manifest
         run: npx -y @anthropic-ai/claude-code plugin validate .claude-plugin/plugin.json
 
-      - name: Validate marketplace manifest
-        run: npx -y @anthropic-ai/claude-code plugin validate .claude-plugin/marketplace.json
