@@ -1,7 +1,7 @@
 {
   "name": "supabase",
   "version": "0.1.6",
-  "description": "Official Supabase plugin for GitHub Copilot CLI with MCP tools for project management, database work, auth, storage, and Postgres best practices.",
+  "description": "Supabase tools for GitHub Copilot — MCP server for managing your Supabase projects and skills to guide you through every stage of building with Supabase.",
   "author": {
     "name": "Supabase",
     "email": "support@supabase.io"
