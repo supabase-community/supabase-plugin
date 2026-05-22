@@ -1,6 +1,6 @@
 # Supabase Agent Plugin
 
-Official Supabase plugin distribution repo for Claude Code, Cursor, Codex, and Gemini. It bundles:
+Official Supabase plugin distribution repo for Claude Code, Cursor, Codex, GitHub Copilot, and Gemini. It bundles:
 
 > Want to contribute? Read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
@@ -10,60 +10,21 @@ Official Supabase plugin distribution repo for Claude Code, Cursor, Codex, and G
 
 ## Repository Structure
 
-```text
-supabase-plugin/
-├── .claude-plugin/
-│   ├── plugin.json
-│   └── marketplace.json
-├── .codex-plugin/
-│   ├── plugin.json
-│   └── marketplace.json
-├── .cursor-plugin/
-│   ├── plugin.json
-│   └── marketplace.json
-├── agents/
-│   ├── claude/.mcp.json
-│   ├── codex/.app.json
-│   └── cursor/mcp.json
-├── assets/
-│   └── logo.svg
-├── AGENTS.md
-├── CLAUDE.md
-├── README.md
-├── .github/workflows/
-│   ├── sync-agent-skills.yml
-│   └── validate-plugin-manifests.yml
-├── gemini-extension.json
-└── skills/
-    ├── .upstream.json
-    ├── supabase/
-    └── supabase-postgres-best-practices/
-```
+Shared across all vendors:
+- `skills/` — vendored skill files consumed by all surfaces
+- `assets/` — shared assets (logo, etc.)
+- `.github/workflows/` — CI for skill syncing and manifest validation
 
-## Local Validation
+Per-vendor plugin manifests and MCP adapters:
 
-Validate the plugin manifest:
+| Vendor         | Supported |
+|----------------|-----------|
+| Claude Code    | ✓         |
+| Cursor         | ✓         |
+| Codex          | ✓         |
+| GitHub Copilot | ✓         |
+| Gemini         | ✓         |
 
-```bash
-claude plugin validate .claude-plugin/plugin.json
-```
-
-Validate the marketplace wrapper:
-
-```bash
-claude plugin validate .claude-plugin/marketplace.json
-```
-
-Run the plugin locally:
-
-```bash
-claude --plugin-dir .
-```
-
-Then use `/reload-plugins` after edits and verify the namespaced skills:
-
-- `/supabase:supabase`
-- `/supabase:supabase-postgres-best-practices`
 
 ## Notes
 - The root `skills/` directory must contain real files. Do not switch it back to a symlink or submodule-backed path.
