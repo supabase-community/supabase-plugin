@@ -7,5 +7,5 @@ Before opening a PR, test the plugin locally on the surfaces you've changed. Fol
 - **Claude Code** — [Create your first plugin](https://code.claude.com/docs/en/plugins#create-your-first-plugin)
 - **Cursor** — [Test plugins locally](https://cursor.com/docs/plugins#test-plugins-locally)
 - **Codex** — [Install a local plugin manually](https://developers.openai.com/codex/plugins/build#install-a-local-plugin-manually)
-- **GitHub Copilot** — [Extending Copilot Chat in your organization](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating)
+- **GitHub Copilot** — [Extending Copilot Chat in your organization](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating#creating-a-plugin)
 - **Gemini CLI** — [Link your extension](https://geminicli.com/docs/extensions/writing-extensions/#step-4-link-your-extension)
