@@ -1,0 +1,28 @@
+{
+  "name": "supabase",
+  "version": "0.1.6",
+  "description": "Supabase tools for GitHub Copilot — MCP server for managing your Supabase projects and skills to guide you through every stage of building with Supabase.",
+  "author": {
+    "name": "Supabase",
+    "email": "support@supabase.io"
+  },
+  "repository": "https://github.com/supabase-community/supabase-plugin",
+  "license": "MIT",
+  "keywords": [
+    "supabase",
+    "postgres",
+    "database",
+    "backend",
+    "mcp",
+    "auth",
+    "storage",
+    "realtime",
+    "edge-functions",
+    "migrations",
+    "rls"
+  ],
+  "skills": [
+    "./skills/"
+  ],
+  "mcpServers": "./agents/copilot/.mcp.json"
+}
