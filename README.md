@@ -35,7 +35,6 @@ supabase-plugin/
 │   └── validate-plugin-manifests.yml
 ├── gemini-extension.json
 └── skills/
-    ├── .upstream.json
     ├── supabase/
     └── supabase-postgres-best-practices/
 ```
@@ -67,4 +66,4 @@ Then use `/reload-plugins` after edits and verify the namespaced skills:
 
 ## Notes
 - The root `skills/` directory must contain real files. Do not switch it back to a symlink or submodule-backed path.
-- Vendored skills are synced from `supabase/agent-skills` release assets through `.github/workflows/sync-agent-skills.yml`.
+- Skills are synced automatically from `supabase/agent-skills` releases via `.github/workflows/sync-agent-skills.yml`. The workflow is triggered by the release pipeline in `supabase/agent-skills` and opens a PR here with the updated skill files.

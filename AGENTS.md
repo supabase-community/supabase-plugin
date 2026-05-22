@@ -83,13 +83,10 @@ When adding a new vendor plugin:
 
 ## Syncing Skills
 
-The shipped skills in `skills/` are intended to be real vendored files.
+The shipped skills in `skills/` are vendored files synced automatically from `supabase/agent-skills`.
 
 - The source of truth for skill content is `supabase/agent-skills`.
 - This repo consumes release assets from `supabase/agent-skills`, not a submodule or symlink.
-- The sync workflow polls the latest GitHub release from `supabase/agent-skills` and expects it to publish:
-  - `supabase.tar.gz`
-  - `supabase-postgres-best-practices.tar.gz`
-- Synced provenance is tracked in `skills/.upstream.json`.
-
-If skills are updated upstream, let the scheduled sync workflow pick up the new release or run the workflow manually with a specific `release_tag` to vendor them into this repo as normal files and review the resulting PR here before merge.
+- When a new release is published in `supabase/agent-skills`, its release pipeline triggers `.github/workflows/sync-agent-skills.yml` in this repo via a GitHub App.
+- The sync workflow downloads `index.json` from the release, then for each skill listed: downloads the tarball, verifies its SHA-256 digest, and extracts it into `skills/<name>/`. Skills no longer present in the index are removed.
+- The workflow opens a PR with the resulting changes. If nothing changed, no PR is opened.
