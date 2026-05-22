@@ -1,19 +1,17 @@
 name: Sync Supabase agent skills from supabase/agent-skills releases
 
 on:
-  schedule:
-    - cron: "17 9 * * 1"
   workflow_dispatch:
     inputs:
       release_tag:
-        description: Optional release tag from supabase/agent-skills (for example, v0.1.0). Defaults to the latest release.
-        required: false
+        description: Release tag from supabase/agent-skills (e.g. v0.1.0).
+        required: true
       release_version:
-        description: Optional semver corresponding to the release tag
-        required: false
+        description: Semver corresponding to the release tag.
+        required: true
       commit_sha:
-        description: Optional source commit SHA for metadata
-        required: false
+        description: Source commit SHA for metadata.
+        required: true
 
 permissions:
   contents: write
@@ -27,99 +25,68 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Resolve release metadata
-        id: release
-        shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [ -n "${{ inputs.release_tag }}" ]; then
-            TAG="${{ inputs.release_tag }}"
-            VERSION="${{ inputs.release_version }}"
-            SHA="${{ inputs.commit_sha }}"
-          else
-            TAG=$(gh release view --repo supabase/agent-skills --json tagName --jq '.tagName')
-            VERSION="${TAG#v}"
-            SHA=$(gh release view "${TAG}" --repo supabase/agent-skills --json targetCommitish --jq '.targetCommitish')
-          fi
-
-          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
-          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
-          echo "sha=${SHA}" >> "$GITHUB_OUTPUT"
-
-      - name: Check whether sync is needed
-        id: should_sync
-        shell: bash
-        run: |
-          CURRENT_TAG=$(jq -r '.source_release // ""' skills/.upstream.json)
-
-          if [ "${CURRENT_TAG}" = "${{ steps.release.outputs.tag }}" ]; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Download skill release assets
-        if: ${{ steps.should_sync.outputs.changed == 'true' }}
+      - name: Download index.json
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p /tmp/agent-skills-release
-          gh release download "${{ steps.release.outputs.tag }}" \
+          gh release download "${{ inputs.release_tag }}" \
             --repo supabase/agent-skills \
             --dir /tmp/agent-skills-release \
-            --pattern "supabase.tar.gz" \
-            --pattern "supabase-postgres-best-practices.tar.gz"
+            --pattern "index.json"
 
-      - name: Replace vendored skills
-        if: ${{ steps.should_sync.outputs.changed == 'true' }}
+      - name: Sync skills
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          rm -rf skills/supabase skills/supabase-postgres-best-practices
-          mkdir -p skills
+          INDEX=/tmp/agent-skills-release/index.json
+          SKILL_NAMES=$(jq -r '.skills[].name' "${INDEX}")
 
-          tar -xzf /tmp/agent-skills-release/supabase.tar.gz -C skills
-          tar -xzf /tmp/agent-skills-release/supabase-postgres-best-practices.tar.gz -C skills
+          for name in ${SKILL_NAMES}; do
+            gh release download "${{ inputs.release_tag }}" \
+              --repo supabase/agent-skills \
+              --dir /tmp/agent-skills-release \
+              --pattern "${name}.tar.gz"
 
-      - name: Update upstream metadata
-        if: ${{ steps.should_sync.outputs.changed == 'true' }}
-        shell: bash
-        run: |
-          SYNCED_AT=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
-          cat > skills/.upstream.json <<EOF
-          {
-            "source_repo": "supabase/agent-skills",
-            "source_release": "${{ steps.release.outputs.tag }}",
-            "source_version": "${{ steps.release.outputs.version }}",
-            "source_commit": "${{ steps.release.outputs.sha }}",
-            "synced_at": "${SYNCED_AT}",
-            "managed_paths": [
-              "skills/supabase",
-              "skills/supabase-postgres-best-practices"
-            ],
-            "assets": [
-              "supabase.tar.gz",
-              "supabase-postgres-best-practices.tar.gz"
-            ]
-          }
-          EOF
+            EXPECTED=$(jq -r --arg n "${name}" '.skills[] | select(.name == $n) | .digest' "${INDEX}")
+            ALGO="${EXPECTED%%:*}"
+            EXPECTED_HEX="${EXPECTED##*:}"
+            ACTUAL_HEX=$("${ALGO}sum" "/tmp/agent-skills-release/${name}.tar.gz" | awk '{print $1}')
+
+            if [ "${ACTUAL_HEX}" != "${EXPECTED_HEX}" ]; then
+              echo "Digest mismatch for ${name}: expected ${EXPECTED_HEX}, got ${ACTUAL_HEX}"
+              exit 1
+            fi
+
+            rm -rf "skills/${name}"
+            mkdir -p "skills/${name}"
+            tar -xzf "/tmp/agent-skills-release/${name}.tar.gz" -C "skills/${name}"
+          done
+
+          for dir in skills/*/; do
+            name=$(basename "${dir}")
+            if ! echo "${SKILL_NAMES}" | grep -qx "${name}"; then
+              rm -rf "skills/${name}"
+            fi
+          done
+
+          rm -f skills/.upstream.json
 
       - name: Create pull request
-        if: ${{ steps.should_sync.outputs.changed == 'true' }}
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: chore/sync-agent-skills-${{ steps.release.outputs.tag }}
+          branch: chore/sync-agent-skills
           delete-branch: true
-          commit-message: "chore: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
-          title: "chore: sync skills from agent-skills ${{ steps.release.outputs.tag }}"
+          commit-message: "chore: sync skills from agent-skills ${{ inputs.release_tag }}"
+          title: "chore: sync skills from agent-skills ${{ inputs.release_tag }}"
           body: |
             ## Summary
             - sync vendored skills from `supabase/agent-skills`
-            - update `skills/.upstream.json` with the source release metadata
 
             ## Source
-            - release tag: `${{ steps.release.outputs.tag }}`
-            - version: `${{ steps.release.outputs.version }}`
-            - commit: `${{ steps.release.outputs.sha }}`
+            - release tag: `${{ inputs.release_tag }}`
+            - version: `${{ inputs.release_version }}`
+            - commit: `${{ inputs.commit_sha }}`
 
             ## Notes
             - generated by the `sync-agent-skills` workflow
