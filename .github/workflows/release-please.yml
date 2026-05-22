@@ -27,15 +27,15 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
         run: |
           declare -A archives=(
-            ["supabase-claude-plugin.tar.gz"]=".claude-plugin/plugin.json agents/claude/.mcp.json skills/"
-            ["supabase-cursor-plugin.tar.gz"]=".cursor-plugin/plugin.json agents/cursor/mcp.json skills/"
-            ["supabase-codex-plugin.tar.gz"]=".codex-plugin/plugin.json agents/codex/.app.json skills/"
-            ["supabase-copilot-plugin.tar.gz"]=".github/plugin/plugin.json agents/copilot/.mcp.json skills/"
-            ["supabase-gemini-extension.tar.gz"]="gemini-extension.json SUPABASE.md skills/"
+            ["claude-plugin"]=".claude-plugin/plugin.json agents/claude/.mcp.json"
+            ["cursor-plugin"]=".cursor-plugin/plugin.json agents/cursor/mcp.json"
+            ["codex-plugin"]=".codex-plugin/plugin.json agents/codex/.app.json"
+            ["copilot-plugin"]=".github/plugin/plugin.json agents/copilot/.mcp.json"
+            ["gemini-extension"]="gemini-extension.json SUPABASE.md"
           )
-          for archive in "${!archives[@]}"; do
+          for name in "${!archives[@]}"; do
             # shellcheck disable=SC2086
-            tar -czvf "$archive" --dereference ${archives[$archive]}
+            tar -czvf "supabase-${name}.tar.gz" --dereference ${archives[$name]} skills/
           done
 
       - name: Upload release assets
