@@ -48,6 +48,8 @@ Known vendor documentation pages:
   - https://developers.openai.com/codex/plugins/build
 - GitHub Copilot:
   - https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing
+  - https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating
+  - https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference
 - Gemini CLI:
   - https://geminicli.com/docs/extensions/writing-extensions/
 
@@ -76,16 +78,3 @@ When adding a new vendor plugin:
    - required MCP filename
    - whether marketplace metadata is needed
    - local validation command for that vendor
-
-## Syncing Skills
-
-The shipped skills in `skills/` are intended to be real vendored files.
-
-- The source of truth for skill content is `supabase/agent-skills`.
-- This repo consumes release assets from `supabase/agent-skills`, not a submodule or symlink.
-- The sync workflow polls the latest GitHub release from `supabase/agent-skills` and expects it to publish:
-  - `supabase.tar.gz`
-  - `supabase-postgres-best-practices.tar.gz`
-- Synced provenance is tracked in `skills/.upstream.json`.
-
-If skills are updated upstream, let the scheduled sync workflow pick up the new release or run the workflow manually with a specific `release_tag` to vendor them into this repo as normal files and review the resulting PR here before merge.
