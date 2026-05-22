@@ -1,5 +1,16 @@
 # Contributing
 
+## Adding a New Vendor Plugin
+
+After adding the vendor-specific files, wire up the new vendor into the release pipeline:
+
+1. **`release-please-config.json`** — add an entry to `extra-files` for each JSON field that should be bumped on release. At minimum this is the `version` field in the vendor's manifest. If the vendor's MCP config includes an `X-Source-Version` header, add that field too.
+
+2. **`.github/workflows/release-please.yml`** — add the new vendor to the `archives` associative array in the "Create vendor archives" step, mapping the archive filename to the space-separated list of files to include. Then add the new archive filename to the `gh release upload` command.
+
+3. **`.release-please-manifest.json`** — this file is managed automatically by release-please. Do not edit it by hand; it will be updated when the next release PR is merged.
+
+
 ## Testing
 
 Before opening a PR, test the plugin locally on the surfaces you've changed. Follow the instructions below to test the plugin for every vendor supported:

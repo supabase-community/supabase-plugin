@@ -1,0 +1,51 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/checkout@v4
+        if: ${{ steps.release.outputs.release_created }}
+        with:
+          submodules: true
+
+      - name: Create vendor archives
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          declare -A archives=(
+            ["supabase-claude-plugin.tar.gz"]=".claude-plugin/plugin.json agents/claude/.mcp.json skills/"
+            ["supabase-cursor-plugin.tar.gz"]=".cursor-plugin/plugin.json agents/cursor/mcp.json skills/"
+            ["supabase-codex-plugin.tar.gz"]=".codex-plugin/plugin.json agents/codex/.app.json skills/"
+            ["supabase-copilot-plugin.tar.gz"]=".github/plugin/plugin.json agents/copilot/.mcp.json skills/"
+            ["supabase-gemini-extension.tar.gz"]="gemini-extension.json SUPABASE.md skills/"
+          )
+          for archive in "${!archives[@]}"; do
+            # shellcheck disable=SC2086
+            tar -czvf "$archive" --dereference ${archives[$archive]}
+          done
+
+      - name: Upload release assets
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload ${{ steps.release.outputs.tag_name }} \
+            supabase-claude-plugin.tar.gz \
+            supabase-cursor-plugin.tar.gz \
+            supabase-codex-plugin.tar.gz \
+            supabase-copilot-plugin.tar.gz \
+            supabase-gemini-extension.tar.gz
