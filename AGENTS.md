@@ -47,7 +47,7 @@ Known vendor documentation pages:
 - Codex:
   - https://developers.openai.com/codex/plugins/build
 - GitHub Copilot:
-  - https://docs.github.com/en/copilot/customizing-copilot/extending-copilot-chat-in-your-organization
+  - https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-finding-installing
 - Gemini CLI:
   - https://geminicli.com/docs/extensions/writing-extensions/
 
