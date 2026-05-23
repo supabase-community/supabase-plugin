@@ -53,13 +53,13 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: feat/sync-agent-skills
+          branch: feat/sync-agent-skills-v${{ inputs.release_tag }}
           delete-branch: true
-          commit-message: "chore: sync skills from agent-skills ${{ inputs.release_tag }}"
-          title: "feat: sync skills from agent-skills ${{ inputs.release_tag }}"
+          commit-message: "feat: sync skills from supabase/agent-skills ${{ inputs.release_tag }}"
+          title: "feat: sync skills from supabase/agent-skills ${{ inputs.release_tag }}"
           body: |
             ## Summary
-            - sync vendored skills from `supabase/agent-skills`
+            - sync Supabase agent skills from `supabase/agent-skills`
 
             ## Source
             - release tag: `${{ inputs.release_tag }}`
