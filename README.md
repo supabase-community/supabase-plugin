@@ -27,12 +27,4 @@ Per-vendor plugin manifests and MCP adapters:
 
 ## Notes
 - The root `skills/` directory must contain real files. Do not switch it back to a symlink or submodule-backed path.
-<<<<<<< HEAD
-<<<<<<< HEAD
 - Skills are synced automatically from `supabase/agent-skills` releases via `.github/workflows/sync-agent-skills.yml`. The workflow is triggered by the release pipeline in [`supabase/agent-skills](https://github.com/supabase/agent-skills/blob/4e69c80e213f315c02c9ebef9c28dd6e43a4707e/.github/workflows/release.yml#L65)` and opens a PR here with the updated skill files.
-=======
-- Skills are synced automatically from `supabase/agent-skills` releases via `.github/workflows/sync-agent-skills.yml`. The workflow is triggered by the release pipeline in `supabase/agent-skills` and opens a PR here with the updated skill files.
->>>>>>> 533eed8 (fix: rewrite skill sync workflow and update docs)
-=======
-- Skills are synced automatically from `supabase/agent-skills` releases via `.github/workflows/sync-agent-skills.yml`. The workflow is triggered by the release pipeline in [`supabase/agent-skills](https://github.com/supabase/agent-skills/blob/4e69c80e213f315c02c9ebef9c28dd6e43a4707e/.github/workflows/release.yml#L65)` and opens a PR here with the updated skill files.
->>>>>>> cbeed0b (minor fix in README.md)

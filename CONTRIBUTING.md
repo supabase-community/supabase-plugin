@@ -20,3 +20,18 @@ Before opening a PR, test the plugin locally on the surfaces you've changed. Fol
 - **Codex** — [Install a local plugin manually](https://developers.openai.com/codex/plugins/build#install-a-local-plugin-manually)
 - **GitHub Copilot** — [Extending Copilot Chat in your organization](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating#creating-a-plugin)
 - **Gemini CLI** — [Link your extension](https://geminicli.com/docs/extensions/writing-extensions/#step-4-link-your-extension)
+
+## Releases
+
+Releases are managed automatically by [release-please](https://github.com/googleapis/release-please) via `.github/workflows/release.yml`. The workflow runs on every push to `main` and decides whether to open or update a release PR based on commit message types ([Conventional Commits](https://www.conventionalcommits.org/)):
+
+| Commit type | Release effect |
+|---|---|
+| `feat:` | Patch bump (minor pre-1.0, per config) |
+| `fix:` | Patch bump |
+| `feat!:` / `BREAKING CHANGE` | Major bump |
+| `chore:`, `docs:`, `refactor:`, `ci:`, etc. | No release |
+
+When a release PR is merged, release-please creates a GitHub release and the workflow builds and uploads the vendors archives, each containing the vendor manifest, MCP adapter, shared `skills/`, and `assets/`.
+
+Version numbers are bumped automatically across all vendor `plugin.json` files and MCP config headers — do not edit them by hand.
