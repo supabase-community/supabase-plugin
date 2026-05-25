@@ -20,8 +20,6 @@ jobs:
 
       - uses: actions/checkout@v4
         if: ${{ steps.release.outputs.release_created }}
-        with:
-          submodules: true
 
       - name: Create vendor archives
         if: ${{ steps.release.outputs.release_created }}
