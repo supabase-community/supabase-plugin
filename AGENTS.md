@@ -72,7 +72,12 @@ When adding a new vendor plugin:
 
 5. If a vendor requires a different MCP filename, add or generate that adapter file without changing the structures for the plugins already present in this repo.
 
-6. Document, in the PR or maintainer notes:
+6. Wire up the release pipeline:
+   - In `release-please-config.json`, add an entry to `extra-files` for the vendor manifest's `version` field, and for `X-Source-Version` in the MCP config if present.
+   - In `.github/workflows/release.yml`, add the vendor to the `archives` associative array in the "Create vendor archives" step, and add the archive filename to the `gh release upload` command.
+   - Do not edit `.release-please-manifest.json` by hand; release-please manages it automatically.
+
+7. Document, in the PR or maintainer notes:
    - the vendor documentation URL used
    - required manifest path
    - required MCP filename

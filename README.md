@@ -13,7 +13,6 @@ Official Supabase plugin distribution repo for Claude Code, Cursor, Codex, GitHu
 Shared across all vendors:
 - `skills/` — vendored skill files consumed by all surfaces
 - `assets/` — shared assets (logo, etc.)
-- `.github/workflows/` — CI for skill syncing and manifest validation
 
 Per-vendor plugin manifests and MCP adapters:
 
