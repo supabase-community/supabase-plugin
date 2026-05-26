@@ -28,4 +28,4 @@ Per-vendor plugin manifests and MCP adapters:
 
 ## Notes
 - The root `skills/` directory must contain real files. Do not switch it back to a symlink or submodule-backed path.
-- Vendored skills are synced from `supabase/agent-skills` release assets through `.github/workflows/sync-agent-skills.yml`.
+- Skills are synced automatically from `supabase/agent-skills` releases via `.github/workflows/sync-agent-skills.yml`. The workflow is triggered by the release pipeline in [`supabase/agent-skills](https://github.com/supabase/agent-skills/blob/4e69c80e213f315c02c9ebef9c28dd6e43a4707e/.github/workflows/release.yml#L65)` and opens a PR here with the updated skill files.
