@@ -24,11 +24,12 @@ jobs:
       - name: Create vendor archives
         if: ${{ steps.release.outputs.release_created }}
         run: |
+          shopt -s dotglob
           declare -A archives=(
-            ["claude-plugin"]=".claude-plugin agents/claude/.mcp.json"
-            ["cursor-plugin"]=".cursor-plugin agents/cursor/mcp.json"
-            ["codex-plugin"]=".codex-plugin agents/codex/.app.json"
-            ["copilot-plugin"]=".github/plugin agents/copilot/.mcp.json"
+            ["claude-plugin"]=".claude-plugin/* agents/claude/*"
+            ["cursor-plugin"]=".cursor-plugin/* agents/cursor/*"
+            ["codex-plugin"]=".codex-plugin/* agents/codex/*"
+            ["copilot-plugin"]=".github/plugin/* agents/copilot/*"
             ["gemini-extension"]="gemini-extension.json SUPABASE.md"
           )
           for name in "${!archives[@]}"; do
