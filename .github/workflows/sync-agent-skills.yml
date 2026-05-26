@@ -23,13 +23,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          mkdir -p /tmp/agent-skills-release
+          mkdir -p "$RUNNER_TEMP/agent-skills-release"
           gh release download "${{ inputs.release_tag }}" \
             --repo supabase/agent-skills \
-            --dir /tmp/agent-skills-release \
+            --dir "$RUNNER_TEMP/agent-skills-release" \
             --pattern "index.json"
 
-          INDEX=/tmp/agent-skills-release/index.json
+          INDEX="$RUNNER_TEMP/agent-skills-release/index.json"
 
           rm -rf skills/*/
 
@@ -38,16 +38,16 @@ jobs:
             expected_hex=$(jq -r --arg n "${name}" '.skills[] | select(.name == $n) | .digest' "${INDEX}")
             expected_hex="${expected_hex#sha256:}"
 
-            curl -fsSL "${url}" -o "/tmp/agent-skills-release/${name}.tar.gz"
+            curl -fsSL "${url}" -o "$RUNNER_TEMP/agent-skills-release/${name}.tar.gz"
 
-            actual_hex=$(sha256sum "/tmp/agent-skills-release/${name}.tar.gz" | awk '{print $1}')
+            actual_hex=$(sha256sum "$RUNNER_TEMP/agent-skills-release/${name}.tar.gz" | awk '{print $1}')
             if [ "${actual_hex}" != "${expected_hex}" ]; then
               echo "Digest mismatch for ${name}: expected ${expected_hex}, got ${actual_hex}"
               exit 1
             fi
 
             mkdir -p "skills/${name}"
-            tar -xzf "/tmp/agent-skills-release/${name}.tar.gz" -C "skills/${name}"
+            tar -xzf "$RUNNER_TEMP/agent-skills-release/${name}.tar.gz" -C "skills/${name}"
           done
 
       - name: Create pull request
