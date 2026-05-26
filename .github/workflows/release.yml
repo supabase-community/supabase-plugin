@@ -24,6 +24,7 @@ jobs:
       - name: Create vendor archives
         if: ${{ steps.release.outputs.release_created }}
         run: |
+          shopt -s dotglob
           declare -A archives=(
             ["claude-plugin"]=".claude-plugin/* agents/claude/*"
             ["cursor-plugin"]=".cursor-plugin/* agents/cursor/*"
