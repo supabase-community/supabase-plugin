@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.9](https://github.com/supabase-community/supabase-plugin/compare/v0.1.8...v0.1.9) (2026-05-26)
+
+
+### Bug Fixes
+
+* use shopt -s dotglob so wildcards capture dotfiles in archives ([#32](https://github.com/supabase-community/supabase-plugin/issues/32)) ([76a228a](https://github.com/supabase-community/supabase-plugin/commit/76a228a67d6f3c8a253aba7ce0d305bf1f7cfa42))
+
 ## [0.1.8](https://github.com/supabase-community/supabase-plugin/compare/v0.1.7...v0.1.8) (2026-05-26)
 
 
