@@ -25,10 +25,10 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
         run: |
           declare -A archives=(
-            ["claude-plugin"]=".claude-plugin/* agents/claude/*"
-            ["cursor-plugin"]=".cursor-plugin/* agents/cursor/*"
-            ["codex-plugin"]=".codex-plugin/* agents/codex/*"
-            ["copilot-plugin"]=".github/plugin/* agents/copilot/*"
+            ["claude-plugin"]=".claude-plugin agents/claude/.mcp.json"
+            ["cursor-plugin"]=".cursor-plugin agents/cursor/mcp.json"
+            ["codex-plugin"]=".codex-plugin agents/codex/.app.json"
+            ["copilot-plugin"]=".github/plugin agents/copilot/.mcp.json"
             ["gemini-extension"]="gemini-extension.json SUPABASE.md"
           )
           for name in "${!archives[@]}"; do
