@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.10](https://github.com/supabase-community/supabase-plugin/compare/v0.1.9...v0.1.10) (2026-05-27)
+
+
+### Features
+
+* sync skills from supabase/agent-skills v0.1.5 ([#34](https://github.com/supabase-community/supabase-plugin/issues/34)) ([74842f0](https://github.com/supabase-community/supabase-plugin/commit/74842f0daf5dc07635ed8832f1e1a1b43cb4b6f8))
+
 ## [0.1.9](https://github.com/supabase-community/supabase-plugin/compare/v0.1.8...v0.1.9) (2026-05-26)
 
 

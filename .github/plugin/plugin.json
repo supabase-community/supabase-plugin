@@ -1,6 +1,6 @@
 {
   "name": "supabase",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Supabase tools for GitHub Copilot — MCP server for managing your Supabase projects and skills to guide you through every stage of building with Supabase.",
   "author": {
     "name": "Supabase",
