@@ -24,21 +24,14 @@ jobs:
       - name: Create vendor archives
         if: ${{ steps.release.outputs.release_created }}
         run: |
-          shopt -s dotglob
-          declare -A archives=(
-            ["claude-plugin"]=".claude-plugin/* agents/claude/*"
-            ["cursor-plugin"]=".cursor-plugin/* agents/cursor/*"
-            ["codex-plugin"]=".codex-plugin/* agents/codex/*"
-            ["copilot-plugin"]=".github/plugin/* agents/copilot/*"
-            ["gemini-extension"]="gemini-extension.json SUPABASE.md"
-          )
-          for name in "${!archives[@]}"; do
-            # shellcheck disable=SC2086
-            tar -czvf "supabase-${name}.tar.gz" --dereference ${archives[$name]} skills/ assets/ || exit 1
-          done
+          tar -czvf "supabase-plugin.tar.gz" --dereference \
+            .claude-plugin/ .cursor-plugin/ .codex-plugin/ \
+            .github/plugin/ agents/ \
+            gemini-extension.json SUPABASE.md \
+            skills/ assets/ || exit 1
 
       - name: Upload release assets
         if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ steps.release.outputs.tag_name }} supabase-claude-plugin.tar.gz supabase-cursor-plugin.tar.gz supabase-codex-plugin.tar.gz supabase-copilot-plugin.tar.gz supabase-gemini-extension.tar.gz
+        run: gh release upload ${{ steps.release.outputs.tag_name }} supabase-plugin.tar.gz
