@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.11](https://github.com/supabase-community/supabase-plugin/compare/v0.1.10...v0.1.11) (2026-06-05)
+
+
+### Bug Fixes
+
+* ship platform-specific gemini extension tarballs ([#37](https://github.com/supabase-community/supabase-plugin/issues/37)) ([b4c1943](https://github.com/supabase-community/supabase-plugin/commit/b4c19435c1b51fcb4efbcdfa8107a7800ec8a578))
+
 ## [0.1.10](https://github.com/supabase-community/supabase-plugin/compare/v0.1.9...v0.1.10) (2026-05-27)
 
 
