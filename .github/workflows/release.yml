@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      force_publish:
+        description: 'Skip release-please and publish current version of supabase-plugin'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -19,10 +25,22 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: actions/checkout@v4
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.force_publish == true }}
+        with:
+          fetch-tags: true
+
+      - name: Resolve release tag
+        id: tag
+        if: ${{ steps.release.outputs.release_created || inputs.force_publish == true }}
+        run: |
+          if [ -n "${{ steps.release.outputs.tag_name }}" ]; then
+            echo "name=${{ steps.release.outputs.tag_name }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "name=$(git describe --tags --abbrev=0)" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Create vendor archives
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.force_publish == true }}
         run: |
           tar -czvf "supabase-plugin.tar.gz" --dereference \
             .claude-plugin/ .cursor-plugin/ .codex-plugin/ \
@@ -31,7 +49,7 @@ jobs:
             skills/ assets/ || exit 1
 
       - name: Upload release assets
-        if: ${{ steps.release.outputs.release_created }}
+        if: ${{ steps.release.outputs.release_created || inputs.force_publish == true }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ steps.release.outputs.tag_name }} supabase-plugin.tar.gz
+        run: gh release upload ${{ steps.tag.outputs.name }} supabase-plugin.tar.gz --clobber
