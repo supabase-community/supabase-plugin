@@ -16,16 +16,11 @@ Keep this repository focused on the shared multi-vendor plugin layout:
 - `.cursor-plugin/plugin.json` defines the Cursor plugin surface
 - `.codex-plugin/plugin.json` defines the Codex plugin surface
 - `.grok-plugin/plugin.json` defines the Grok Build plugin surface
-- `.kimi-plugin/plugin.json` defines the Kimi Code plugin surface (with its MCP server declared inline — see below)
+- `.kimi-plugin/plugin.json` defines the Kimi Code plugin surface (with its MCP server declared inline)
 - `.github/plugin/plugin.json` defines the GitHub Copilot plugin surface
 - `agents/claude/.mcp.json`, `agents/cursor/mcp.json`, `agents/grok/mcp.json`, `agents/codex/.app.json`, and `agents/copilot/.mcp.json` hold agent-specific MCP config files
 - `gemini-extension.json` defines the Gemini extension manifest
 - `skills/` contains the shipped, real skill files consumed by the supported plugin surfaces
-
-Two vendor-specific MCP notes:
-
-- **Grok Build** natively prefers `.grok-plugin/plugin.json` over `.claude-plugin/plugin.json` (verified against `grok` `v0.2.101`), so it gets its own manifest pointing at `agents/grok/mcp.json` (`X-Source-Name: grok-plugin`). This holds whether it is installed through the `plugins` CLI (which stages the whole repo) or via `grok plugin install`. Grok resolves the `mcpServers` file-path reference.
-- **Kimi Code is the one exception to the "MCP config lives in `agents/<vendor>/`" convention.** Kimi's plugin loader evaluates `mcpServers` as an inline object (`Object.entries(manifest.mcpServers)`), so a path string is iterated character-by-character and breaks — it cannot reference an external file. The Supabase MCP server (`X-Source-Name: kimi-plugin`) is therefore declared **inline** in `.kimi-plugin/plugin.json`, and there is intentionally no `agents/kimi/mcp.json`. When updating the shared MCP URL or headers, remember to edit the inline block in `.kimi-plugin/plugin.json` as well.
 
 This repo should stay self-contained. Claude marketplace installs copy the plugin into Claude's local cache, so paths outside the plugin root are fragile and should be avoided.
 
