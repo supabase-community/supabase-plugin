@@ -57,11 +57,6 @@
         },
         {
           "type": "json",
-          "path": "agents/kimi/mcp.json",
-          "jsonpath": "$.mcpServers.supabase.headers[\"X-Source-Version\"]"
-        },
-        {
-          "type": "json",
           "path": "agents/grok/mcp.json",
           "jsonpath": "$.mcpServers.supabase.headers[\"X-Source-Version\"]"
         },
