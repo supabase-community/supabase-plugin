@@ -27,6 +27,11 @@
         },
         {
           "type": "json",
+          "path": ".grok-plugin/plugin.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
           "path": ".github/plugin/plugin.json",
           "jsonpath": "$.version"
         },
@@ -48,6 +53,16 @@
         {
           "type": "json",
           "path": ".kimi-plugin/plugin.json",
+          "jsonpath": "$.mcpServers.supabase.headers[\"X-Source-Version\"]"
+        },
+        {
+          "type": "json",
+          "path": "agents/kimi/mcp.json",
+          "jsonpath": "$.mcpServers.supabase.headers[\"X-Source-Version\"]"
+        },
+        {
+          "type": "json",
+          "path": "agents/grok/mcp.json",
           "jsonpath": "$.mcpServers.supabase.headers[\"X-Source-Version\"]"
         },
         {

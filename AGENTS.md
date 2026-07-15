@@ -15,13 +15,17 @@ Keep this repository focused on the shared multi-vendor plugin layout:
 - `.claude-plugin/plugin.json` defines the Claude Code plugin identity and metadata
 - `.cursor-plugin/plugin.json` defines the Cursor plugin surface
 - `.codex-plugin/plugin.json` defines the Codex plugin surface
-- `.kimi-plugin/plugin.json` defines the Kimi Code plugin surface (with its MCP server declared inline)
+- `.grok-plugin/plugin.json` defines the Grok Build plugin surface
+- `.kimi-plugin/plugin.json` defines the Kimi Code plugin surface (with its MCP server declared inline — see below)
 - `.github/plugin/plugin.json` defines the GitHub Copilot plugin surface
-- `agents/claude/.mcp.json`, `agents/cursor/mcp.json`, `agents/codex/.app.json`, and `agents/copilot/.mcp.json` hold agent-specific MCP config files
+- `agents/claude/.mcp.json`, `agents/cursor/mcp.json`, `agents/grok/mcp.json`, `agents/kimi/mcp.json`, `agents/codex/.app.json`, and `agents/copilot/.mcp.json` hold agent-specific MCP config files
 - `gemini-extension.json` defines the Gemini extension manifest
 - `skills/` contains the shipped, real skill files consumed by the supported plugin surfaces
 
-Grok Build does not have its own manifest: the `plugins` CLI installs it through Grok's Claude Code compatibility layer, which reads `.claude-plugin/plugin.json` (and therefore `agents/claude/.mcp.json`). There is no `.grok-plugin/` directory to maintain.
+Two vendor-specific MCP notes:
+
+- **Grok Build** natively prefers `.grok-plugin/plugin.json` over `.claude-plugin/plugin.json` (verified against `grok` `v0.2.101`), so it gets its own manifest pointing at `agents/grok/mcp.json` (`X-Source-Name: grok-plugin`). This holds whether it is installed through the `plugins` CLI (which stages the whole repo) or via `grok plugin install`. Grok resolves the `mcpServers` file-path reference.
+- **Kimi Code** cannot reference an external MCP file: its plugin loader evaluates `mcpServers` as an inline object (`Object.entries(manifest.mcpServers)`), so a path string is treated as characters and breaks. `.kimi-plugin/plugin.json` therefore inlines the MCP server. `agents/kimi/mcp.json` is kept as the canonical, tracked source of that block for layout consistency with the other vendors; the two must stay in sync (release-please bumps the `X-Source-Version` in both).
 
 This repo should stay self-contained. Claude marketplace installs copy the plugin into Claude's local cache, so paths outside the plugin root are fragile and should be avoided.
 
@@ -35,7 +39,7 @@ npx claude plugin validate .claude-plugin/plugin.json
 
 ## Editing Rules
 
-- Do not move `skills/`, `agents/`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.codex-plugin/plugin.json`, or `.kimi-plugin/plugin.json` out of the repo root layout.
+- Do not move `skills/`, `agents/`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.codex-plugin/plugin.json`, `.grok-plugin/plugin.json`, or `.kimi-plugin/plugin.json` out of the repo root layout.
 - Do not replace `skills/` with a symlink or submodule reference.
 - Keep the plugin name stable as `supabase` unless there is a deliberate migration plan.
 - When changing descriptions or keywords, update all relevant `plugin.json` files together.
@@ -63,10 +67,12 @@ Known vendor documentation pages:
   - https://geminicli.com/docs/extensions/writing-extensions/
 - Grok Build:
   - https://x.ai/cli
-  - Installed via the `plugins` CLI using Grok's Claude Code compatibility layer (reuses `.claude-plugin/`); no dedicated manifest.
+  - https://docs.x.ai/build/features/skills-plugins-marketplaces
+  - Uses a dedicated `.grok-plugin/plugin.json` (Grok prefers it over `.claude-plugin/`) pointing at `agents/grok/mcp.json`. Installable via the `plugins` CLI or `grok plugin install`.
 - Kimi Code:
   - https://www.kimi.com/code
-  - Installed via the `plugins` CLI into Kimi's native plugin store; uses `.kimi-plugin/plugin.json` with skills, commands, hooks, and MCP servers (no agents or LSP support).
+  - https://www.kimi.com/code/docs/en/kimi-code-cli/customization/plugins.html
+  - Installed via the `plugins` CLI into Kimi's native plugin store; uses `.kimi-plugin/plugin.json` with skills, commands, hooks, and MCP servers (no agents or LSP support). MCP servers must be declared inline — Kimi does not resolve external file references.
 - `plugins` CLI (vendor-neutral installer):
   - https://github.com/vercel-labs/plugins
 
