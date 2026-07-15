@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This repository is the plugin distribution repo for Supabase across Claude Code, Cursor, Codex, GitHub Copilot, Gemini, Kimi Code, and the vendor-neutral Open Plugin format (consumed by VS Code).
+This repository is the plugin distribution repo for Supabase across Claude Code, Cursor, Codex, GitHub Copilot, Gemini, Grok Build, Kimi Code, and the vendor-neutral Open Plugin format (consumed by VS Code).
 
 These vendors are installable through the vendor-neutral [`plugins`](https://github.com/vercel-labs/plugins) CLI, which translates the shared plugin layout into each target's native format:
 
@@ -15,10 +15,11 @@ Keep this repository focused on the shared multi-vendor plugin layout:
 - `.claude-plugin/plugin.json` defines the Claude Code plugin identity and metadata
 - `.cursor-plugin/plugin.json` defines the Cursor plugin surface
 - `.codex-plugin/plugin.json` defines the Codex plugin surface
+- `.grok-plugin/plugin.json` defines the Grok Build plugin surface
 - `.kimi-plugin/plugin.json` defines the Kimi Code plugin surface (with its MCP server declared inline)
 - `.github/plugin/plugin.json` defines the GitHub Copilot plugin surface
 - `.plugin/plugin.json` defines the vendor-neutral [Open Plugin](https://open-plugins.com/) surface (consumed by VS Code today, and by any other Open Plugin host)
-- `agents/claude/.mcp.json`, `agents/cursor/mcp.json`, `agents/codex/.app.json`, `agents/copilot/.mcp.json`, and `agents/open-plugin/.mcp.json` hold agent-specific MCP config files
+- `agents/claude/.mcp.json`, `agents/cursor/mcp.json`, `agents/grok/mcp.json`, `agents/codex/.app.json`, `agents/copilot/.mcp.json`, and `agents/open-plugin/.mcp.json` hold agent-specific MCP config files
 - `gemini-extension.json` defines the Gemini extension manifest
 - `skills/` contains the shipped, real skill files consumed by the supported plugin surfaces
 
@@ -34,7 +35,7 @@ npx claude plugin validate .claude-plugin/plugin.json
 
 ## Editing Rules
 
-- Do not move `skills/`, `agents/`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.codex-plugin/plugin.json`, `.kimi-plugin/plugin.json`, or `.plugin/plugin.json` out of the repo root layout.
+- Do not move `skills/`, `agents/`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.codex-plugin/plugin.json`, `.grok-plugin/plugin.json`, `.kimi-plugin/plugin.json`, or `.plugin/plugin.json` out of the repo root layout.
 - Do not replace `skills/` with a symlink or submodule reference.
 - Keep the plugin name stable as `supabase` unless there is a deliberate migration plan.
 - When changing descriptions or keywords, update all relevant `plugin.json` files together.
@@ -60,6 +61,10 @@ Known vendor documentation pages:
   - https://docs.github.com/en/copilot/reference/copilot-cli-reference/cli-plugin-reference
 - Gemini CLI:
   - https://geminicli.com/docs/extensions/writing-extensions/
+- Grok Build:
+  - https://x.ai/cli
+  - https://docs.x.ai/build/features/skills-plugins-marketplaces
+  - Uses a dedicated `.grok-plugin/plugin.json` (Grok prefers it over `.claude-plugin/`) pointing at `agents/grok/mcp.json`. Installable via the `plugins` CLI or `grok plugin install`.
 - Kimi Code:
   - https://www.kimi.com/code
   - https://www.kimi.com/code/docs/en/kimi-code-cli/customization/plugins.html
