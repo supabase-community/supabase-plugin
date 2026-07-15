@@ -24,6 +24,16 @@ Validate the plugin manifest:
 npx claude plugin validate .claude-plugin/plugin.json
 ```
 
+Run the tests (see `tests/`):
+
+```bash
+npm install         # once, to install the dev dependencies
+npm test            # fast structural checks (manifests, versions, keywords, MCP headers)
+npm run test:install # install each vendor via the `plugins` CLI + native Grok CLI
+```
+
+`npm run test:install` installs the supabase plugin for every supported vendor into a sandboxed `HOME`. Specs that need a native CLI (`grok`, `copilot`) skip automatically when that binary is not on `PATH`; CI provisions them.
+
 ## Editing Rules
 
 - Do not move `skills/`, `agents/`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, or `.codex-plugin/plugin.json` out of the repo root layout.

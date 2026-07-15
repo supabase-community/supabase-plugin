@@ -1,3 +1,6 @@
+### Node ###
+node_modules/
+
 ### Agents ###
 CLAUDE.local.md
 .claude/
