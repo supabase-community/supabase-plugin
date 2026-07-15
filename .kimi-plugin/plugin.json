@@ -15,7 +15,13 @@
     "postgres",
     "database",
     "backend",
-    "mcp"
+    "mcp",
+    "auth",
+    "storage",
+    "realtime",
+    "edge-functions",
+    "migrations",
+    "rls"
   ],
   "skills": "./skills/",
   "mcpServers": {
