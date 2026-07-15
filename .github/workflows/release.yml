@@ -25,7 +25,7 @@ jobs:
         if: ${{ steps.release.outputs.release_created }}
         run: |
           tar -czvf "supabase-plugin.tar.gz" --dereference \
-            .claude-plugin/ .cursor-plugin/ .codex-plugin/ \
+            .claude-plugin/ .cursor-plugin/ .codex-plugin/ .grok-plugin/ \
             .github/plugin/ agents/ \
             gemini-extension.json SUPABASE.md \
             skills/ assets/ || exit 1
