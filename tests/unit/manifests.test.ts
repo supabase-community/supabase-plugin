@@ -65,31 +65,6 @@ describe("Codex plugin", () => {
   });
 });
 
-describe("Grok Build plugin", () => {
-  const manifest = readJson(".grok-plugin/plugin.json");
-
-  it("manifest is named supabase at the shared version", () => {
-    expect(manifest.name).toBe("supabase");
-    expect(manifest.version).toBe(VERSION);
-  });
-
-  it("keywords match the canonical Claude list", () => {
-    expect(manifest.keywords).toEqual(CANONICAL_KEYWORDS);
-  });
-
-  it("references a dedicated agents/grok/mcp.json file", () => {
-    expect(manifest.mcpServers).toBe("./agents/grok/mcp.json");
-    expect(existsSync(join(repoRoot, "agents/grok/mcp.json"))).toBe(true);
-  });
-
-  it("MCP server targets Supabase as grok-plugin", () => {
-    const server = readJson("agents/grok/mcp.json").mcpServers.supabase;
-    expect(server.url).toBe(MCP_URL);
-    expect(server.headers["X-Source-Name"]).toBe("grok-plugin");
-    expect(server.headers["X-Source-Version"]).toBe(VERSION);
-  });
-});
-
 describe("Kimi Code plugin", () => {
   const manifest = readJson(".kimi-plugin/plugin.json");
 
@@ -156,11 +131,6 @@ describe("release-please wiring", () => {
     readJson("release-please-config.json").packages["."]["extra-files"];
   const has = (path: string, jsonpath: string) =>
     extraFiles.some((f) => f.path === path && f.jsonpath === jsonpath);
-
-  it("tracks the Grok manifest version and its MCP X-Source-Version", () => {
-    expect(has(".grok-plugin/plugin.json", "$.version")).toBe(true);
-    expect(has("agents/grok/mcp.json", '$.mcpServers.supabase.headers["X-Source-Version"]')).toBe(true);
-  });
 
   it("tracks the Kimi manifest version and its inline MCP X-Source-Version", () => {
     expect(has(".kimi-plugin/plugin.json", "$.version")).toBe(true);

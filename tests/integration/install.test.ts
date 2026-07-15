@@ -51,20 +51,7 @@ describe("installable via the plugins CLI", () => {
 
   it("kimi", () => installViaPluginsCli("kimi"));
 
-  // Grok and Copilot install through their native CLIs; skip when absent
-  // (CI provisions them, local runs without them stay green).
-  it.skipIf(!hasBinary("grok"))("grok", () => installViaPluginsCli("grok"));
-
+  // Copilot installs through its native CLI; skip when absent (CI provisions
+  // it, local runs without it stay green).
   it.skipIf(!hasBinary("copilot"))("github-copilot", () => installViaPluginsCli("github-copilot"));
-});
-
-describe("installable via the native Grok CLI", () => {
-  // Kimi has no headless native install (`/plugins install` is an interactive
-  // TUI command), so the plugins CLI above is its only programmatic installer.
-  it.skipIf(!hasBinary("grok"))("grok plugin install registers the supabase plugin", () => {
-    const env = sandboxEnv();
-    run("grok", ["plugin", "validate", repoRoot], env);
-    expect(run("grok", ["plugin", "install", repoRoot, "--trust"], env)).toMatch(/supabase/i);
-    expect(run("grok", ["plugin", "list"], env)).toMatch(/supabase/i);
-  });
 });
