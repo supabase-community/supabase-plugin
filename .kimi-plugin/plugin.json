@@ -1,0 +1,43 @@
+{
+  "name": "supabase",
+  "version": "0.1.12",
+  "description": "Official Supabase plugin for Kimi Code with bundled Supabase skills and MCP access for project management, database work, auth, storage, and Postgres best practices.",
+  "author": {
+    "name": "Supabase",
+    "email": "support@supabase.io",
+    "url": "https://supabase.com"
+  },
+  "homepage": "https://supabase.com",
+  "repository": "https://github.com/supabase-community/supabase-plugin",
+  "license": "MIT",
+  "keywords": [
+    "supabase",
+    "postgres",
+    "database",
+    "backend",
+    "mcp",
+    "auth",
+    "storage",
+    "realtime",
+    "edge-functions",
+    "migrations",
+    "rls"
+  ],
+  "skills": "./skills/",
+  "mcpServers": {
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp",
+      "headers": {
+        "X-Source-Name": "kimi-plugin",
+        "X-Source-Version": "0.1.12"
+      }
+    }
+  },
+  "interface": {
+    "displayName": "Supabase",
+    "shortDescription": "Supabase skills and MCP tools for Kimi Code",
+    "developerName": "Supabase",
+    "websiteURL": "https://supabase.com"
+  }
+}
