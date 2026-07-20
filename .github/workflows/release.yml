@@ -26,7 +26,7 @@ jobs:
         run: |
           tar -czvf "supabase-plugin.tar.gz" --dereference \
             .claude-plugin/ .cursor-plugin/ .codex-plugin/ .kimi-plugin/ \
-            .github/plugin/ agents/ \
+            .github/plugin/ .plugin/ agents/ \
             gemini-extension.json SUPABASE.md \
             skills/ assets/ || exit 1
 

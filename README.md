@@ -1,6 +1,6 @@
 # Supabase Agent Plugin
 
-Official Supabase plugin distribution repo for Claude Code, Cursor, Codex, GitHub Copilot, and Gemini. It bundles:
+Official Supabase plugin distribution repo for Claude Code, Cursor, Codex, GitHub Copilot, Gemini, and VS Code. It bundles:
 
 > Want to contribute? Read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
@@ -23,6 +23,7 @@ Per-vendor plugin manifests and MCP adapters:
 | Codex          | ✓         |
 | GitHub Copilot | ✓         |
 | Gemini         | ✓         |
+| VS Code (Open Plugin) | ✓  |
 
 
 ## Notes

@@ -1,0 +1,26 @@
+{
+  "name": "supabase",
+  "version": "0.1.12",
+  "description": "Official Supabase plugin in the vendor-neutral Open Plugin format with bundled Supabase skills and MCP access for project management, database work, auth, storage, and Postgres best practices.",
+  "author": {
+    "name": "Supabase",
+    "email": "support@supabase.io"
+  },
+  "repository": "https://github.com/supabase-community/supabase-plugin",
+  "license": "MIT",
+  "keywords": [
+    "supabase",
+    "postgres",
+    "database",
+    "backend",
+    "mcp",
+    "auth",
+    "storage",
+    "realtime",
+    "edge-functions",
+    "migrations",
+    "rls"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./agents/open-plugin/.mcp.json"
+}
