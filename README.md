@@ -1,6 +1,6 @@
 # Supabase Agent Plugin
 
-Official Supabase plugin distribution repo for Claude Code, Cursor, Codex, GitHub Copilot, Gemini, and VS Code. It bundles:
+Official Supabase plugin distribution repo for Claude Code, Cursor, Codex, and other supported agents (check [Agents Supported](https://github.com/supabase-community/supabase-plugin#agents-supported) section below). It bundles:
 
 > Want to contribute? Read [CONTRIBUTING.md](CONTRIBUTING.md) first.
 
@@ -14,7 +14,7 @@ Shared across all vendors:
 - `skills/` — vendored skill files consumed by all surfaces
 - `assets/` — shared assets (logo, etc.)
 
-Per-vendor plugin manifests and MCP adapters:
+### Agents supported:
 
 | Vendor         | Supported |
 |----------------|-----------|
