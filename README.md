@@ -24,6 +24,7 @@ Per-vendor plugin manifests and MCP adapters:
 | GitHub Copilot | ✓         |
 | Gemini         | ✓         |
 | VS Code (Open Plugin) | ✓  |
+| Kimi Code         | ✓         |
 
 
 ## Notes
