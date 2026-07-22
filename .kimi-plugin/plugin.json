@@ -1,6 +1,6 @@
 {
   "name": "supabase",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Official Supabase plugin for Kimi Code with bundled Supabase skills and MCP access for project management, database work, auth, storage, and Postgres best practices.",
   "author": {
     "name": "Supabase",
@@ -30,7 +30,7 @@
       "url": "https://mcp.supabase.com/mcp",
       "headers": {
         "X-Source-Name": "kimi-plugin",
-        "X-Source-Version": "0.1.12"
+        "X-Source-Version": "0.1.13"
       }
     }
   },
