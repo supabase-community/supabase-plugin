@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.13](https://github.com/supabase-community/supabase-plugin/compare/v0.1.12...v0.1.13) (2026-07-30)
+
+
+### Features
+
+* add Kimi Code plugin support ([#44](https://github.com/supabase-community/supabase-plugin/issues/44)) ([974058c](https://github.com/supabase-community/supabase-plugin/commit/974058ca5815900b76db4bd0008430d5904937cf))
+* add Supabase Open Plugin (VS Code) support ([#43](https://github.com/supabase-community/supabase-plugin/issues/43)) ([5d74232](https://github.com/supabase-community/supabase-plugin/commit/5d74232687a0a82184ecd4266ea07372edb43f4b))
+* sync skills from supabase/agent-skills v0.1.7 ([#52](https://github.com/supabase-community/supabase-plugin/issues/52)) ([e078658](https://github.com/supabase-community/supabase-plugin/commit/e078658a6e371fe7de771cfb7a11669ca1147e0b))
+
 ## [0.1.12](https://github.com/supabase-community/supabase-plugin/compare/v0.1.11...v0.1.12) (2026-07-13)
 
 
