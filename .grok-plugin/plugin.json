@@ -1,6 +1,6 @@
 {
   "name": "supabase",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "Official Supabase plugin for Grok Build with bundled Supabase skills and MCP access for project management, database work, auth, storage, and Postgres best practices.",
   "author": {
     "name": "Supabase",
