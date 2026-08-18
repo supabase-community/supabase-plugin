@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.15](https://github.com/supabase-community/supabase-plugin/compare/v0.1.14...v0.1.15) (2026-08-18)
+
+
+### Features
+
+* add Grok Build plugin support ([#45](https://github.com/supabase-community/supabase-plugin/issues/45)) ([45eb603](https://github.com/supabase-community/supabase-plugin/commit/45eb603ca310cc525e14ff514a8ff9bf751b97b9))
+
 ## [0.1.14](https://github.com/supabase-community/supabase-plugin/compare/v0.1.13...v0.1.14) (2026-08-12)
 
 
