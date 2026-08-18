@@ -25,6 +25,7 @@ Shared across all vendors:
 | Gemini         | ✓         |
 | VS Code (Open Plugin) | ✓  |
 | Kimi Code         | ✓         |
+| Grok Build     | ✓         |
 
 
 ## Notes

@@ -22,3 +22,24 @@ jobs:
       - name: Validate plugin manifest
         run: npx -y @anthropic-ai/claude-code plugin validate .claude-plugin/plugin.json
 
+  validate-grok:
+    name: Validate Grok plugin manifest
+    runs-on: ubuntu-latest
+
+    env:
+      GROK_BIN_DIR: ${{ github.workspace }}/.grok-bin
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Grok CLI
+        run: |
+          curl -fsSL https://x.ai/cli/install.sh | bash
+          echo "$GROK_BIN_DIR" >> "$GITHUB_PATH"
+
+      - name: Validate Grok plugin manifest
+        run: |
+          grok version
+          grok plugin validate .
+
