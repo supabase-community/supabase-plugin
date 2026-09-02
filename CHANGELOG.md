@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.16](https://github.com/supabase-community/supabase-plugin/compare/v0.1.15...v0.1.16) (2026-09-02)
+
+
+### Bug Fixes
+
+* **plugin:** make brand colours accessible across themes ([f3f332e](https://github.com/supabase-community/supabase-plugin/commit/f3f332e0164c34a8392772811737fda0cb972d06))
+
 ## [0.1.15](https://github.com/supabase-community/supabase-plugin/compare/v0.1.14...v0.1.15) (2026-08-18)
 
 
