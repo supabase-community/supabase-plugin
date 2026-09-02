@@ -37,7 +37,8 @@
       "Review my Supabase schema and RLS policies for security issues.",
       "Optimize my Postgres queries and indexes using Supabase best practices."
     ],
-    "brandColor": "#3ECF8E",
+    "brandColor": "#0D8351",
+    "brandColorDark": "#3ECF8E",
     "logo": "./assets/logo.svg"
   }
 }
