@@ -26,12 +26,43 @@ jobs:
         run: |
           tar -czvf "supabase-plugin.tar.gz" --dereference \
             .claude-plugin/ .cursor-plugin/ .codex-plugin/ .kimi-plugin/ \
-            .grok-plugin/ .github/plugin/ .plugin/ agents/ \
+            .grok-plugin/ .github/plugin/ .plugin/ m365/ agents/ \
             gemini-extension.json SUPABASE.md \
             skills/ assets/ || exit 1
 
-      - name: Upload release assets
+      - name: Upload vendor archives
         if: ${{ steps.release.outputs.release_created }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release upload ${{ steps.release.outputs.tag_name }} supabase-plugin.tar.gz
+        run: gh release upload --clobber ${{ steps.release.outputs.tag_name }} supabase-plugin.tar.gz
+
+      - name: Build Microsoft 365 app package
+        if: ${{ steps.release.outputs.release_created }}
+        run: |
+          # Stage the manifest-referenced skills next to the M365 manifest so
+          # the package has manifest.json / icons / tools/ / skills/ at the root.
+          rm -rf m365-build && mkdir -p m365-build/tools
+          cp m365/manifest.json m365/color.png m365/outline.png m365-build/
+          cp m365/tools/supabase-tools.json m365-build/tools/
+          mkdir -p m365-build/skills
+          python3 - <<'EOF'
+          import json
+          m = json.load(open('m365/manifest.json'))
+          for s in m.get('agentSkills', []):
+              folder = s['folder'].lstrip('./')
+              src = 'skills/' + folder.removeprefix('skills/')
+              import shutil
+              shutil.copytree(src, 'm365-build/skills/' + folder.split('/')[-1])
+          EOF
+          find m365-build/skills -name CHANGELOG.md -delete
+          # Same companion-file + contract checks as the PR/main validation job
+          # (m365/scripts/check-package.py), run against the staged skills tree.
+          python3 ./m365/scripts/check-package.py --skills-root m365-build/skills || exit 1
+          (cd m365-build && zip -r "../supabase-m365-plugin.zip" .) || exit 1
+          rm -rf m365-build
+
+      - name: Upload Microsoft 365 app package
+        if: ${{ steps.release.outputs.release_created }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release upload --clobber ${{ steps.release.outputs.tag_name }} supabase-m365-plugin.zip

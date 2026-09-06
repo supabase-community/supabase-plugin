@@ -1,0 +1,45 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/teams/v1.28/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.28",
+  "version": "0.1.15",
+  "id": "839bcde8-153a-5111-87ae-64b30cb04591",
+  "developer": {
+    "name": "Supabase",
+    "websiteUrl": "https://github.com/supabase-community/supabase-plugin",
+    "privacyUrl": "https://supabase.com/privacy",
+    "termsOfUseUrl": "https://supabase.com/terms"
+  },
+  "name": {
+    "short": "Supabase",
+    "full": "Supabase"
+  },
+  "description": {
+    "short": "Manage Supabase projects, databases, and more with Copilot",
+    "full": "The official Supabase plugin for Microsoft 365 Copilot. Bundles the Supabase MCP server and Supabase agent skills so Copilot can query your database, manage migrations, deploy Edge Functions, and follow Supabase and Postgres best practices."
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "accentColor": "#3ECF8E",
+  "agentSkills": [
+    {
+      "folder": "./skills/supabase"
+    }
+  ],
+  "agentConnectors": [
+    {
+      "id": "supabase",
+      "displayName": "Supabase MCP Server",
+      "description": "Remote MCP server providing Supabase tools for Copilot",
+      "toolSource": {
+        "remoteMcpServer": {
+          "mcpServerUrl": "https://mcp.supabase.com/mcp",
+          "mcpToolDescription": {
+            "file": "./tools/supabase-tools.json"
+          }
+        }
+      }
+    }
+  ]
+}
