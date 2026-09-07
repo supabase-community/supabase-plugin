@@ -43,7 +43,7 @@ find build/skills -name CHANGELOG.md -delete
 (cd build && zip -r ../supabase-m365-plugin.zip .) && rm -rf build
 ```
 
-> Stages the shared `skills/` at the archive root next to the manifest, matching the layout the manifest references (`./skills/...`, `./tools/supabase-tools.json`). This mirrors the [`release.yml`](../.github/workflows/release.yml) build step.
+> Stages the shared `skills/` at the archive root next to the manifest, matching the layout the manifest references (`./skills/...`, `./tools/supabase-tools.json`). The release ships a single `supabase-plugin.tar.gz` (the shared vendor archive, which includes `m365/`); the app package is assembled from the repo (or from that tarball's `m365/` + `skills/`) with the commands above.
 
 Then install into your tenant (personal scope for testing):
 
