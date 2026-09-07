@@ -50,6 +50,12 @@ jobs:
             tar -xzf "$RUNNER_TEMP/agent-skills-release/${name}.tar.gz" -C "skills/${name}"
           done
 
+      - name: Regenerate Microsoft 365 agentSkills
+        run: |
+          # Derive m365/manifest.json agentSkills from the synced skills/ dir,
+          # filtering to skills within Microsoft's 20-companion-file cap.
+          python3 ./m365/scripts/generate-agent-skills.py
+
       - name: Create pull request
         uses: peter-evans/create-pull-request@v7
         with:
@@ -60,6 +66,7 @@ jobs:
           body: |
             ## Summary
             - sync Supabase agent skills from `supabase/agent-skills`
+            - regenerate `m365/manifest.json` `agentSkills` from the synced `skills/` (skills over Microsoft's 20-companion-file cap are excluded)
 
             ## Source
             - release tag: `${{ inputs.release_tag }}`
