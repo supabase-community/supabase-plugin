@@ -13,10 +13,11 @@ This is a manual bring-up: the `plugins` CLI (`npx plugins add`) does not yet ta
 | `tools/supabase-tools.json` | `mcpToolDescription` — required by the v1.28 schema (HTTP 400 if absent). Generated from the MCP server's tool definitions; see [Keeping tool descriptions up to date](#keeping-tool-descriptions-up-to-date). |
 | `scripts/generate-tools.mjs` | Regenerates `tools/supabase-tools.json` from the live MCP server's `tools/list`. |
 | `scripts/check-package.py` | Companion-file + `mcpToolDescription` guard, shared by `release.yml`, `validate-plugin-manifests.yml` and `sync-m365-tools.yml`. |
+| `scripts/generate-agent-skills.py` | Regenerates `manifest.json` `agentSkills` from `skills/`, filtering to Microsoft's 20-companion-file cap. Run by `sync-agent-skills.yml` on each skill sync. |
 
 The `skills/` folder is shared from the repo root `skills/` (referenced by `agentSkills[].folder`); it is not duplicated here.
 
-**Which skills ship:** the manifest declares only skills that fit Microsoft's companion-file cap (20 non-`SKILL.md` files per skill, Error at upload/sync). Currently that's `skills/supabase` — 2 companion files shipped (3 in-repo; `CHANGELOG.md` is stripped from the package). `skills/supabase-postgres-best-practices` has 34 shipped / 35 in-repo companion files and is excluded until it is split or pruned below 20. The release build step and the PR validation workflow fail if a sync puts any declared skill over the cap.
+**Which skills ship:** the manifest declares only skills that fit Microsoft's companion-file cap (20 non-`SKILL.md` files per skill, Error at upload/sync — see the [MS docs](https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/cowork-plugin-development#companion-file-limits)). `agentSkills` is regenerated automatically from `skills/` by `sync-agent-skills.yml` on each skill sync, excluding any skill over the cap. Currently that's `skills/supabase` — 2 companion files shipped (3 in-repo; `CHANGELOG.md` is stripped from the package). `skills/supabase-postgres-best-practices` has 34 shipped / 35 in-repo companion files and is excluded until it is split or pruned below 20. The PR/main validation workflow fails if a sync puts any declared skill over the cap.
 
 ## Build and install
 
