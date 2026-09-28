@@ -5,7 +5,7 @@
       "url": "https://mcp.supabase.com/mcp",
       "headers": {
         "X-Source-Name": "grok-plugin",
-        "X-Source-Version": "0.1.15"
+        "X-Source-Version": "0.1.16"
       }
     }
   }
