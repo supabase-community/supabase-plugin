@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - main
+  push:
+    branches:
+      - main
 
 jobs:
   validate:
@@ -42,4 +45,34 @@ jobs:
         run: |
           grok version
           grok plugin validate .
+
+  validate-m365:
+    name: Validate Microsoft 365 Copilot manifest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate Microsoft 365 manifest schema
+        run: |
+          npx -y --package @microsoft/m365agentstoolkit-cli \
+            atk validate --manifest-file ./m365/manifest.json --interactive false
+          # verify the referenced tool-description file exists and is valid JSON
+          python3 -c "import json; tools=json.load(open('m365/tools/supabase-tools.json')); assert isinstance(tools, list) and len(tools) > 0"
+
+      - name: Validate companion-file cap and tool descriptions
+        run: |
+          # Enforces Microsoft's Error-severity companion-file rules and the
+          # mcpToolDescription contract (see m365/scripts/check-package.py).
+          # Runs on PRs and on push to main. The sync workflow guards its own
+          # output inline (create-pull-request uses GITHUB_TOKEN, which triggers
+          # no workflow runs), so a degraded live tools/list fails the sync job
+          # instead of becoming a PR.
+          python3 ./m365/scripts/check-package.py
 

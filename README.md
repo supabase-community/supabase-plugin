@@ -26,6 +26,7 @@ Shared across all vendors:
 | VS Code (Open Plugin) | ✓  |
 | Kimi Code         | ✓         |
 | Grok Build     | ✓         |
+| Microsoft 365 Copilot | ✓ (manual bring-up via `atk`, see [`m365/README.md`](m365/README.md)) |
 
 
 ## Notes

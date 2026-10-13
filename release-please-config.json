@@ -42,6 +42,11 @@
         },
         {
           "type": "json",
+          "path": "m365/manifest.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
           "path": "gemini-extension.json",
           "jsonpath": "$.version"
         },
