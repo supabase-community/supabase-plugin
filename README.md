@@ -26,6 +26,7 @@ Shared across all vendors:
 | VS Code (Open Plugin) | ✓  |
 | Kimi Code         | ✓         |
 | Grok Build     | ✓         |
+| Neotask        | ✓         |
 
 
 ## Notes
