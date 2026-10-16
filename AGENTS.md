@@ -2,7 +2,7 @@
 
 This repository is the plugin distribution repo for Supabase across Claude Code, Cursor, Codex, GitHub Copilot, Gemini, Grok Build, Kimi Code, Antigravity, and the vendor-neutral Open Plugin format (consumed by VS Code).
 
-These vendors are installable through the vendor-neutral [`plugins`](https://github.com/vercel-labs/plugins) CLI, which translates the shared plugin layout into each target's native format:
+All of these except Gemini and Antigravity are installable through the vendor-neutral [`plugins`](https://github.com/vercel-labs/plugins) CLI, which translates the shared plugin layout into each target's native format:
 
 ```bash
 npx plugins add supabase-community/supabase-plugin
@@ -73,7 +73,7 @@ Known vendor documentation pages:
 - Antigravity:
   - https://antigravity.google/docs/plugins/
   - Publishing guide (PDF from Google partnerships) is the source for marketplace fields: `displayName`, `logo`, `suggestedPrompts`, `version`, and `author` are required for the Marketplace.
-  - Uses `.antigravity-plugin/plugin.json` (only the manifest lives there; component paths resolve from the repo root). Its MCP config is `mcp_config.json` at the repo root: the publishing guide documents a manifest `mcpServers` path field, but `agy` 1.3.5 ignores it (the `skills` field works) and only loads `<plugin-root>/mcp_config.json`. Remote MCP servers use `serverUrl` (not `url`/`httpUrl`). Plugin server keys are prefixed with the plugin name, so the key is `mcp` (-> `supabase_mcp`, or `supabase-mcp` per the guide). OAuth is automatic via dynamic client registration. Antigravity also scans `agents/` for subagents, so each `agents/<vendor>/` folder is counted as an agent. Validate with `agy plugin validate .`.
+  - Uses `.antigravity-plugin/plugin.json` (only the manifest lives there; component paths resolve from the repo root). Its MCP config is `mcp_config.json` at the repo root: the publishing guide documents a manifest `mcpServers` path field, but `agy` 1.3.5 ignores it (the `skills` field works) and only loads `<plugin-root>/mcp_config.json`. Remote MCP servers use `serverUrl` (not `url`/`httpUrl`). Plugin server keys are prefixed with the plugin name, so the key is `mcp` (-> `supabase_mcp`). OAuth is automatic via dynamic client registration. Antigravity also scans `agents/` for subagents, so each `agents/<vendor>/` folder is counted as an agent until that folder is renamed (follow-up proposed in #66). Validate with `agy plugin validate .`.
 - Open Plugin:
   - https://open-plugins.com/
   - Vendor-neutral plugin manifest (`.plugin/plugin.json`) that any Open Plugin host can consume. Its MCP config lives in `agents/open-plugin/.mcp.json` with a generic `X-Source-Name: open-plugin`; individual clients are distinguished server-side by client name.

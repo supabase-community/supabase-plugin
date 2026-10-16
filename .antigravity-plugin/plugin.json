@@ -1,5 +1,4 @@
 {
-  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
   "name": "supabase",
   "displayName": "Supabase",
   "version": "0.1.16",
