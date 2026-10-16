@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.17](https://github.com/supabase-community/supabase-plugin/compare/v0.1.16...v0.1.17) (2026-10-16)
+
+
+### Features
+
+* add Antigravity plugin support ([dbaecb0](https://github.com/supabase-community/supabase-plugin/commit/dbaecb0aea6ef8f2d2e81ec2196b61061a30ef72))
+* add Antigravity plugin support ([947cf53](https://github.com/supabase-community/supabase-plugin/commit/947cf53083aa327e0a5ddfa0808547dadf925d8d))
+
+
+### Bug Fixes
+
+* load Antigravity MCP config from plugin root ([c317f5e](https://github.com/supabase-community/supabase-plugin/commit/c317f5e8b361d9aa05e427276744b6a7cbd4497d))
+
 ## [0.1.16](https://github.com/supabase-community/supabase-plugin/compare/v0.1.15...v0.1.16) (2026-09-28)
 
 
