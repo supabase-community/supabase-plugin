@@ -19,6 +19,7 @@ Before opening a PR, test the plugin locally on the surfaces you've changed. Fol
 - **Cursor** — [Test plugins locally](https://cursor.com/docs/plugins#test-plugins-locally)
 - **Codex** — [Install a local plugin manually](https://developers.openai.com/codex/plugins/build#install-a-local-plugin-manually)
 - **GitHub Copilot** — [Extending Copilot Chat in your organization](https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating#creating-a-plugin)
+- **Antigravity** — [Create your first plugin](https://antigravity.google/docs/plugins/) (`agy plugin validate . && agy plugin install .`)
 - **Gemini CLI** — [Link your extension](https://geminicli.com/docs/extensions/writing-extensions/#step-4-link-your-extension)
 
 ## Releases

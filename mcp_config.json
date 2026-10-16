@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "mcp": {
+      "serverUrl": "https://mcp.supabase.com/mcp",
+      "headers": {
+        "X-Source-Name": "antigravity-plugin",
+        "X-Source-Version": "0.1.16"
+      }
+    }
+  }
+}

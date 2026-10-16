@@ -1,0 +1,34 @@
+{
+  "name": "supabase",
+  "displayName": "Supabase",
+  "version": "0.1.16",
+  "description": "Official Supabase plugin for Antigravity with Supabase skills and MCP access for project management, database work, auth, storage, and Postgres best practices.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Set up Supabase Auth and protected routes for my app",
+    "Review my Supabase schema and RLS policies for security issues",
+    "Optimize my Postgres queries and indexes using Supabase best practices"
+  ],
+  "category": "Databases",
+  "keywords": [
+    "supabase",
+    "postgres",
+    "database",
+    "backend",
+    "mcp",
+    "auth",
+    "storage",
+    "realtime",
+    "edge-functions",
+    "migrations",
+    "rls"
+  ],
+  "author": {
+    "name": "Supabase",
+    "email": "support@supabase.io",
+    "url": "https://supabase.com"
+  },
+  "homepage": "https://supabase.com",
+  "repository": "https://github.com/supabase-community/supabase-plugin",
+  "license": "MIT"
+}

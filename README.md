@@ -1,18 +1,26 @@
 # Supabase Agent Plugin
 
-Official Supabase plugin distribution repo for Claude Code, Cursor, Codex, and other supported agents (check [Agents Supported](https://github.com/supabase-community/supabase-plugin#agents-supported) section below). It bundles:
+Official Supabase plugin for Claude Code, Cursor, Codex, Antigravity, and other AI coding agents (see [Agents supported](#agents-supported)). It gives your agent:
+
+- the Supabase MCP server (`https://mcp.supabase.com/mcp`) to manage your projects, databases, and Edge Functions
+- the `supabase` skill for general Supabase product guidance
+- the `supabase-postgres-best-practices` skill for Postgres performance and schema guidance
+
+## Getting started
+
+Install the plugin from your agent's plugin marketplace, or follow the steps for your agent in the [Supabase docs](https://supabase.com/docs/guides/ai-tools/plugins). The first time your agent uses the MCP server, it opens your browser so you can sign in to Supabase and authorize access.
+
+If you already added the Supabase MCP server by hand, remove it after installing the plugin so your agent doesn't load the same tools twice.
 
 > Want to contribute? Read [CONTRIBUTING.md](CONTRIBUTING.md) first.
-
-- `skills/supabase` for general Supabase product guidance
-- `skills/supabase-postgres-best-practices` for Postgres performance and schema guidance
-- vendor-specific plugin manifests and MCP adapters for each supported surface
 
 ## Repository Structure
 
 Shared across all vendors:
 - `skills/` — vendored skill files consumed by all surfaces
 - `assets/` — shared assets (logo, etc.)
+
+Each vendor also has its own plugin manifest and MCP config.
 
 ### Agents supported:
 
@@ -22,10 +30,11 @@ Shared across all vendors:
 | Cursor         | ✓         |
 | Codex          | ✓         |
 | GitHub Copilot | ✓         |
-| Gemini         | ✓         |
+| Gemini CLI         | ✓         |
 | VS Code (Open Plugin) | ✓  |
 | Kimi Code         | ✓         |
 | Grok Build     | ✓         |
+| Antigravity    | ✓         |
 
 
 ## Notes

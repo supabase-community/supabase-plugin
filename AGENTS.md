@@ -1,8 +1,8 @@
 # AGENTS.md
 
-This repository is the plugin distribution repo for Supabase across Claude Code, Cursor, Codex, GitHub Copilot, Gemini, Grok Build, Kimi Code, and the vendor-neutral Open Plugin format (consumed by VS Code).
+This repository is the plugin distribution repo for Supabase across Claude Code, Cursor, Codex, GitHub Copilot, Gemini, Grok Build, Kimi Code, Antigravity, and the vendor-neutral Open Plugin format (consumed by VS Code).
 
-These vendors are installable through the vendor-neutral [`plugins`](https://github.com/vercel-labs/plugins) CLI, which translates the shared plugin layout into each target's native format:
+All of these except Gemini and Antigravity are installable through the vendor-neutral [`plugins`](https://github.com/vercel-labs/plugins) CLI, which translates the shared plugin layout into each target's native format:
 
 ```bash
 npx plugins add supabase-community/supabase-plugin
@@ -17,6 +17,7 @@ Keep this repository focused on the shared multi-vendor plugin layout:
 - `.codex-plugin/plugin.json` defines the Codex plugin surface
 - `.grok-plugin/plugin.json` defines the Grok Build plugin surface
 - `.kimi-plugin/plugin.json` defines the Kimi Code plugin surface (with its MCP server declared inline)
+- `.antigravity-plugin/plugin.json` defines the Antigravity plugin surface; its MCP config is `mcp_config.json` at the repo root
 - `.github/plugin/plugin.json` defines the GitHub Copilot plugin surface
 - `.plugin/plugin.json` defines the vendor-neutral [Open Plugin](https://open-plugins.com/) surface (consumed by VS Code today, and by any other Open Plugin host)
 - `agents/claude/.mcp.json`, `agents/cursor/mcp.json`, `agents/grok/mcp.json`, `agents/codex/.app.json`, `agents/copilot/.mcp.json`, and `agents/open-plugin/.mcp.json` hold agent-specific MCP config files
@@ -35,7 +36,7 @@ npx claude plugin validate .claude-plugin/plugin.json
 
 ## Editing Rules
 
-- Do not move `skills/`, `agents/`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.codex-plugin/plugin.json`, `.grok-plugin/plugin.json`, `.kimi-plugin/plugin.json`, or `.plugin/plugin.json` out of the repo root layout.
+- Do not move `skills/`, `agents/`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.codex-plugin/plugin.json`, `.grok-plugin/plugin.json`, `.kimi-plugin/plugin.json`, `.antigravity-plugin/plugin.json`, `.plugin/plugin.json`, or the root `mcp_config.json` out of the repo root layout.
 - Do not replace `skills/` with a symlink or submodule reference.
 - Keep the plugin name stable as `supabase` unless there is a deliberate migration plan.
 - When changing descriptions or keywords, update all relevant `plugin.json` files together.
@@ -69,6 +70,10 @@ Known vendor documentation pages:
   - https://www.kimi.com/code
   - https://www.kimi.com/code/docs/en/kimi-code-cli/customization/plugins.html
   - Installed via the `plugins` CLI into Kimi's native plugin store; uses `.kimi-plugin/plugin.json` with skills, commands, hooks, and MCP servers (no agents or LSP support). MCP servers must be declared inline — Kimi does not resolve external file references.
+- Antigravity:
+  - https://antigravity.google/docs/plugins/
+  - Publishing guide (PDF from Google partnerships) is the source for marketplace fields: `displayName`, `logo`, `suggestedPrompts`, `version`, and `author` are required for the Marketplace.
+  - Uses `.antigravity-plugin/plugin.json` (only the manifest lives there; component paths resolve from the repo root). Its MCP config is `mcp_config.json` at the repo root: the publishing guide documents a manifest `mcpServers` path field, but `agy` 1.3.5 ignores it (the `skills` field works) and only loads `<plugin-root>/mcp_config.json`. Remote MCP servers use `serverUrl` (not `url`/`httpUrl`). Plugin server keys are prefixed with the plugin name, so the key is `mcp` (-> `supabase_mcp`). OAuth is automatic via dynamic client registration. Antigravity loads subagents from `agents/<name>.md`. Our `agents/<vendor>/` folders hold no `.md` files, so agy 1.4.0 loads none of them, but agy 1.3.5 and earlier listed each folder as an agent. Validate with `agy plugin validate .` (needs agy 1.3.5 or later; 1.2.0 can't find `.antigravity-plugin/plugin.json`).
 - Open Plugin:
   - https://open-plugins.com/
   - Vendor-neutral plugin manifest (`.plugin/plugin.json`) that any Open Plugin host can consume. Its MCP config lives in `agents/open-plugin/.mcp.json` with a generic `X-Source-Name: open-plugin`; individual clients are distinguished server-side by client name.
