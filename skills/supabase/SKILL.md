@@ -1,6 +1,6 @@
 ---
 name: supabase
-description: "Use when doing ANY task involving Supabase. Triggers: Supabase products (Database, Auth, Edge Functions, Realtime, Storage, Vectors, Cron, Queues); client libraries and SSR integrations (supabase-js, @supabase/ssr) in Next.js, React, SvelteKit, Astro, Remix; auth issues (login, logout, sessions, JWT, cookies, getSession, getUser, getClaims, RLS); Supabase CLI or MCP server; schema changes, migrations, declarative schemas, security audits, Postgres extensions (pg_graphql, pg_cron, pg_vector); debugging and troubleshooting errors or unexpected behavior on Supabase projects (HTTP errors, Postgres errors, RLS surprises, permission denied, schema cache issues, timeouts, Edge Function crashes, Realtime drops, Storage failures) and reading or querying logs (Logs Explorer, ClickHouse)."
+description: "Build, configure, or debug Supabase projects, including data access, auth, migrations, and Edge Functions."
 metadata:
   author: supabase
   version: "0.1.2"
@@ -10,13 +10,11 @@ metadata:
 
 ## Core Principles
 
-**1. Supabase changes frequently — verify against changelog and current docs before implementing.**
-Do not rely on training data for Supabase features. Function signatures, config.toml settings, and API conventions change between versions.
-
-First, fetch `https://supabase.com/changelog.md` (a lightweight summary index — not a heavy pull), scan for `breaking-change` tags relevant to your task, and follow the linked page for any that apply. Then look up the relevant topic using the documentation access methods below.
+**1. Use documentation for the feature and version involved.**
+Check current documentation when API behavior, configuration, or compatibility is uncertain. For upgrades or a possible breaking change, consult `https://supabase.com/changelog.md` and follow relevant entries. A copy edit or an already-understood local change does not require a general changelog pass.
 
 **2. Verify your work.**
-After implementing any fix, run a test query to confirm the change works. A fix without verification is incomplete.
+Verify the changed behavior with the relevant query, test, build, or rendered flow. Use a test query for database behavior; do not require a database call for an unrelated documentation or UI fix. Reuse valid evidence and rerun affected checks after changes or failures. Keep verification within the user-authorized environment and report any missing evidence.
 
 **3. Recover from errors, don't loop.**
 If an approach fails after 2-3 attempts, stop and reconsider. Try a different method, check documentation, inspect the error more carefully, and review relevant logs when available. Supabase issues are not always solved by retrying the same command, and the answer is not always in the logs, but logs are often worth checking before proceeding.
