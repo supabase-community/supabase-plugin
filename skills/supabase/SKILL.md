@@ -136,7 +136,7 @@ Use this when the project does not use declarative schemas.
 
 **For exploratory schema changes in a disposable local development database**, use `execute_sql` (MCP) or `supabase db query` (CLI) only after verifying that the selected connection targets that database. These commands run SQL directly without creating migration history. Do not apply this iteration workflow to a shared or production database; use the project's reviewed migration and deployment process for those targets.
 
-Do NOT use `apply_migration` to change a local database schema — it writes a migration history entry on every call, which means you can't iterate, and `supabase db diff` / `supabase db pull` will produce empty or conflicting diffs. If you use it, you'll be stuck with whatever SQL you passed on the first try.
+During pre-migration experimentation on that disposable local database, avoid using `apply_migration` as a scratchpad: each call records migration history. Once the intended change is captured in a migration, test it through the project's migration workflow. Existing migrations do not prevent later changes; add a new migration or reset only an explicitly disposable local database according to the repository workflow. Never rewrite applied shared/production history to simplify a diff.
 
 **When ready to commit** your changes to a migration file:
 
