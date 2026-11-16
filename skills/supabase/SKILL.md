@@ -45,7 +45,7 @@ When working on any Supabase task that touches auth, RLS, views, storage, or use
 - **RLS, views, and privileged database code**
   - **Views bypass RLS by default.** In Postgres 15 and above, use `CREATE VIEW ... WITH (security_invoker = true)`. In older versions of Postgres, protect your views by revoking access from the `anon` and `authenticated` roles, or by putting them in an unexposed schema.
   - **UPDATE requires a SELECT policy.** In Postgres RLS, an UPDATE needs to first SELECT the row. Without a SELECT policy, updates silently return 0 rows — no error, just no change.
-  - **`auth.role()` is deprecated — use the `TO` clause instead.** Supabase has deprecated `auth.role()` in favour of specifying the target role directly on the policy with `TO authenticated` or `TO anon`. Beyond deprecation, `auth.role() = 'authenticated'` breaks silently when anonymous sign-ins are enabled, because anonymous users carry the `authenticated` Postgres role and pass the check regardless of whether the user is genuinely signed in.
+  - **`auth.role()` is deprecated — use the `TO` clause instead.** Supabase has deprecated `auth.role()` in favour of specifying the target role directly on the policy with `TO authenticated` or `TO anon`. Both `auth.role() = 'authenticated'` and `TO authenticated` include anonymous sign-ins, because they also use the `authenticated` Postgres role. When the access model excludes anonymous users, check the `is_anonymous` JWT claim as well as the required row-ownership or other authorization predicate.
     ```sql
     -- Deprecated (do not use)
     create policy "example" on table_name for select
@@ -57,7 +57,7 @@ When working on any Supabase task that touches auth, RLS, views, storage, or use
     to authenticated
     using ( (select auth.uid()) = user_id );
     ```
-  - **UPDATE policies require both `USING` and `WITH CHECK`.** Without `WITH CHECK`, a user can reassign a row's `user_id` to another user:
+  - **Distinguish existing-row access from the allowed updated row.** `USING` controls which existing rows can be updated; `WITH CHECK` controls the resulting row. For `UPDATE` and `ALL` policies, PostgreSQL reuses `USING` as `WITH CHECK` when the latter is omitted. Writing both explicitly makes the ownership invariant clear and is necessary when the two predicates differ:
     ```sql
     create policy "example" on table_name for update
     to authenticated
@@ -134,7 +134,7 @@ Use this when `supabase/schemas/` exists or `config.toml` sets `schema_paths`. E
 
 Use this when the project does not use declarative schemas.
 
-**To make schema changes, use `execute_sql` (MCP) or `supabase db query` (CLI).** These run SQL directly on the database without creating migration history entries, so you can iterate freely and generate a clean migration when ready.
+**For exploratory schema changes in a disposable local development database**, use `execute_sql` (MCP) or `supabase db query` (CLI) only after verifying that the selected connection targets that database. These commands run SQL directly without creating migration history. Do not apply this iteration workflow to a shared or production database; use the project's reviewed migration and deployment process for those targets.
 
 Do NOT use `apply_migration` to change a local database schema — it writes a migration history entry on every call, which means you can't iterate, and `supabase db diff` / `supabase db pull` will produce empty or conflicting diffs. If you use it, you'll be stuck with whatever SQL you passed on the first try.
 
